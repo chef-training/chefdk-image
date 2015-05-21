@@ -1,0 +1,22 @@
+---
+driver:
+  name: vagrant
+
+# verifier:
+#   ruby_bindir: /opt/chefdk/embedded/bin
+#   busser_bin: /home/vagrant/.chefdk/gem/ruby/2.1.0/bin/busser
+#   root_path: /home/vagrant/.chefdk/gem/ruby/2.1.0
+
+provisioner:
+  name: chef_zero
+  # chef_omnibus_install_options: -P chefdk
+  # chef_omnibus_root: /opt/chefdk
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[fundamentals::default]
+    attributes:
