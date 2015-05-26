@@ -12,7 +12,7 @@
     "source_ami": "ami-d85e75b0",
     "instance_type": "t1.micro",
     "ssh_username": "ubuntu",
-    "ami_name": "chefdk-fundamentals-3.0.0"
+    "ami_name": "ubuntu 14.04 chefdk-fundamentals-3.0.0"
   }],
 
   "provisioners": [{

@@ -48,4 +48,18 @@ packages_attendees_will_install.each do |name|
   package name do
     action :remove
   end
-and
+end
+
+
+#
+# These images are being created on EC2 and I have found that often
+# times Ohai is unable to determine that the system is an EC2 instance.
+#
+
+directory '/etc/chef/ohai/hints' do
+  recursive true
+end
+
+file '/etc/chef/ohai/hints/ec2.json' do
+  content '{}'
+end
