@@ -14,6 +14,13 @@ aws_secret_access_key = SECRET_ACCESS_KEY
 4. Run Packer
 
 ```
-$ packer verify aws.json
-$ packef build aws.json
+# Ubuntu 14.04
+$ packer verify ubuntu.json
+$ packer build ubuntu.json
+
+# CentOS 6.5
+$ packer verify centos.json
+$ packer build centos.json
+
 ```
+

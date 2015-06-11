@@ -14,9 +14,14 @@ provisioner:
 
 platforms:
   - name: ubuntu-14.04
+  - name: centos-6.5
 
 suites:
-  - name: default
+  - name: ubuntu
     run_list:
-      - recipe[fundamentals::default]
+      - "recipe[fundamentals:ubuntu]"
+    attributes:
+  - name: centos
+    run_list:
+      - "recipe[fundamentals::centos]"
     attributes:
