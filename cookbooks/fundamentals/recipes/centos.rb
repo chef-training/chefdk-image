@@ -11,7 +11,9 @@ execute "yum update -y"
 
 # https://docs.docker.com/installation/centos/
 
-execute "wget http://ftp.osuosl.org/pub/fedora-epel/6/i386/epel-release-6-8.noarch.rpm"
+remote_file "epel-release-6-8.noarch.rpm" do
+  source "http://ftp.osuosl.org/pub/fedora-epel/6/i386/epel-release-6-8.noarch.rpm"
+end
 
 # This command is not idempotent
 execute "rpm -ivh epel-release-6-8.noarch.rpm"
