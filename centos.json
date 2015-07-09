@@ -15,7 +15,7 @@
     "source_ami": "ami-438e7a28",
     "instance_type": "t1.micro",
     "ssh_username": "root",
-    "ami_name": "CentOS 6.5 chefdk-fundamentals-3.0.1"
+    "ami_name": "CentOS 6.5 chefdk-fundamentals-3.0.2"
   }],
 
   "provisioners": [{

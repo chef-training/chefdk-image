@@ -75,13 +75,17 @@ file '/etc/chef/ohai/hints/ec2.json' do
   content '{}'
 end
 
-# TODO: There was something about turning off ports blocking and other things
-# IPtables & SELinux
-
 service "iptables" do
   action [ :stop, :disable ]
 end
 
-service "selinux" do
-  action [ :stop, :disable ]
+#
+# Disable SELINUX context
+#
+# This is essential when you want to create the clowns/bears
+# site content from the non-standard directories and ports
+#
+template "/etc/selinux/config" do
+  source "selinux-config.erb"
+  mode "0644"
 end
