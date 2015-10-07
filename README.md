@@ -37,7 +37,7 @@ $ export TRAINING_AWS_KEYPAIR=/Users/franklinwebber/.ssh/training-ec2-keypair.pe
 $ packer validate ubuntu.json
 $ packer build ubuntu.json
 
-# CentOS 6.5
+# CentOS 6.7
 $ packer validate centos.json
 $ packer build centos.json
 
@@ -45,4 +45,3 @@ $ packer build centos.json
 $ packer validate windows.json
 $ packer build windows.json
 ```
-

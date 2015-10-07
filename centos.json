@@ -2,19 +2,20 @@
   "variables": {
     "aws_access_key": "",
     "aws_secret_key": "",
-    "aws_keypair": "{{env `TRAINING_AWS_KEYPAIR`}}"
+    "aws_keypair_name": "training-ec2-keypair",
+    "aws_keypair_file": "{{env `TRAINING_AWS_KEYPAIR`}}"
   },
   "builders": [{
     "type": "amazon-ebs",
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
-    "ssh_private_key_file": "{{user `aws_keypair`}}",
-    "region": "us-east-1",
+    "ssh_keypair_name": "{{user `aws_keypair_name`}}",
+    "ssh_private_key_file": "{{user `aws_keypair_file`}}",
     "ami_regions": [ "us-west-1", "eu-west-1" ],
     "instance_type": "t1.micro",
     "source_ami": "ami-c10044a4",
     "ssh_username": "root",
-    "ami_name": "CentOS 6.5 chef-essentials-4.0.0"
+    "ami_name": "CentOS 6.7 chef-essentials-4.0.0"
   }],
 
   "provisioners": [{
