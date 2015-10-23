@@ -96,7 +96,7 @@ execute "sed 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ss
 
 packages_attendees_will_install = %w[ vim nano emacs git ]
 
-package packages_attendees_will_install
+package packages_attendees_will_install do
   action :remove
 end
 
