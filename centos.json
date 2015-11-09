@@ -7,6 +7,7 @@
   },
   "builders": [{
     "type": "amazon-ebs",
+    "ssh_pty": true,
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
     "ssh_keypair_name": "{{user `aws_keypair_name`}}",
