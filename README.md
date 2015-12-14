@@ -1,8 +1,8 @@
-# Creates ChefDK Fundamentals AMI
+# Creates Chef Development Kit enhanced Amazon Machine Instances (AMI)
 
 This project contains a number of Packer files that allow for quick creation of an AMI, installation with necessary tools, and the distribution of the AMI to various regions within a specific AWS account.
 
-Creating an AMI is necessary if the core requirements of what is required for the instance changes. Currently these images are created with the following [criteria](https://github.com/chef-training/chefdk-fundamentals-image/blob/master/cookbooks/fundamentals/test/integration/default/serverspec/default_spec.rb).
+Creating an AMI is necessary if the core requirements of what is required for the instance changes. Currently these images are created with the following [criteria](https://github.com/chef-training/chefdk-image/blob/master/cookbooks/essentials/test/integration/default/serverspec/default_spec.rb).
 
 \1. Get AWS Credentials
 

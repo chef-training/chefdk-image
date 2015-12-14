@@ -19,7 +19,7 @@
     "type": "chef-solo",
     "install_command": "curl -L https://www.chef.io/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s -- -P chefdk",
     "cookbook_paths": ["cookbooks"],
-    "run_list": ["fundamentals::ubuntu"]
+    "run_list": ["essentials::ubuntu"]
 
   }]
 }

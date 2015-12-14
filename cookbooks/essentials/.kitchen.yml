@@ -19,9 +19,9 @@ platforms:
 suites:
   - name: ubuntu
     run_list:
-      - "recipe[fundamentals:ubuntu]"
+      - "recipe[essentials::ubuntu]"
     attributes:
   - name: centos
     run_list:
-      - "recipe[fundamentals::centos]"
+      - "recipe[essentials::centos]"
     attributes:

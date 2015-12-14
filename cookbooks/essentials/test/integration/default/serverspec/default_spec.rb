@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'fundamentals::default' do
+describe 'essentials::default' do
 
   describe user('chef') do
     it { should exist }
