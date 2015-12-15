@@ -16,7 +16,7 @@
     "instance_type": "t1.micro",
     "source_ami": "ami-c10044a4",
     "ssh_username": "root",
-    "ami_name": "CentOS 6.7 chef-essentials-4.0.0"
+    "ami_name": "CentOS 6.7 chef-essentials-4.1.0"
   }],
 
   "provisioners": [{
