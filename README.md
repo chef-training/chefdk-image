@@ -32,16 +32,18 @@ $ export TRAINING_AWS_KEYPAIR=/Users/franklinwebber/.ssh/training-ec2-keypair.pe
 
 > This is an example of using packer to create two images. The Ubuntu 14.04 AMI and the CentOS 6.5 AMI.
 
+* Essentials Image
+
 ```
-# Ubuntu 14.04
-$ packer validate ubuntu.json
-$ packer build ubuntu.json
-
 # CentOS 6.7
-$ packer validate centos.json
-$ packer build centos.json
+$ packer validate essentials-centos.json
+$ packer build essentials-centos.json
+```
 
-# Windows 2012R2
-$ packer validate windows.json
-$ packer build windows.json
+* Compliance Image
+
+```
+# CentOS 6.7
+$ packer validate compliance-centos.json
+$ packer build compliance-centos.json
 ```
