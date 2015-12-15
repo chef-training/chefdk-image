@@ -74,6 +74,26 @@ user 'chef' do
 end
 
 #
+# To allow the chef user to properly manage docker for the purposes of
+# integration testing with Test Kitchen.
+#
+group 'dockerroot' do
+  members 'chef'
+end
+
+
+#
+# To allow the chef user to properly manage docker for the purposes of
+# integration testing with Test Kitchen.
+# /var/run/docker.sock
+#
+# file '/var/run/docker.sock' do
+#   owner 'dockerroot'
+# end
+
+execute 'chown root:dockerroot /var/run/docker.sock'
+
+#
 # Allow password-less sudoers access to the chef user.
 #
 # @note this custom resource is from the sudo cookbook
@@ -141,3 +161,10 @@ template "/etc/selinux/config" do
   source "selinux-config.erb"
   mode "0644"
 end
+
+#
+# To use the Chef development kit version of Ruby as the default Ruby,
+# edit the $PATH and GEM environment variables to include paths to the
+# Chef development kit. For example, on a machine that runs Bash, run:
+#
+execute "echo 'eval \"$(chef shell-init bash)\"' >> /home/chef/.bash_profile"

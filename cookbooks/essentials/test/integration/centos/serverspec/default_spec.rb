@@ -6,6 +6,7 @@ describe 'essentials::default' do
     it { should exist }
     it { should have_home_directory '/home/chef' }
     it { should have_login_shell '/bin/bash' }
+    it { should belong_to_group 'dockerroot' }
   end
 
   describe file('/etc/chef/client.pem') do
@@ -27,6 +28,10 @@ describe 'essentials::default' do
   describe service('docker.io') do
     it { should be_enabled }
     it { should be_running }
+  end
+
+  describe file('/var/run/docker.sock') do
+    it { should be_grouped_into 'dockerroot' }
   end
 
   describe file("/etc/chef/ohai/hints/ec2.json") do
@@ -64,5 +69,9 @@ describe 'essentials::default' do
 
   describe package("git") do
     it { should_not be_installed }
+  end
+
+  describe command('which ruby') do
+    its(:stdout) { should contain('/opt/chefdk/embedded/bin/ruby') }
   end
 end
