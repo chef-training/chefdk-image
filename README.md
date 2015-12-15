@@ -34,8 +34,18 @@ $ export TRAINING_AWS_KEYPAIR=/Users/franklinwebber/.ssh/training-ec2-keypair.pe
 
 > NOTE: Each packer file contains a version number within it. When you need to create a new version of the Packer image you will need to update this packer file version or you may received an error because of a conflict of version numbers.
 
+* Essentials Image
+
 ```
 # CentOS 6.7
 $ packer validate essentials-centos.json
 $ packer build essentials-centos.json
+```
+
+* Compliance Image
+
+```
+# CentOS 6.7
+$ packer validate compliance-centos.json
+$ packer build compliance-centos.json
 ```
