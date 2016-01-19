@@ -30,18 +30,10 @@ $ export TRAINING_AWS_KEYPAIR=/Users/franklinwebber/.ssh/training-ec2-keypair.pe
 
 \5. Run `packer` to create the AMI
 
-> This is an example of using packer to create two images. The Ubuntu 14.04 AMI and the CentOS 6.5 AMI.
+> This is an example of using packer to creating an image for CentOS.
 
 ```
-# Ubuntu 14.04
-$ packer validate ubuntu.json
-$ packer build ubuntu.json
-
 # CentOS 6.7
 $ packer validate centos.json
 $ packer build centos.json
-
-# Windows 2012R2
-$ packer validate windows.json
-$ packer build windows.json
 ```
