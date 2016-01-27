@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'essentials::default' do
+describe 'Essentials Workstation' do
 
   describe user('chef') do
     it { should exist }

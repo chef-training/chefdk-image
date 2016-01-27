@@ -1,0 +1,28 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+  chef_omnibus_install_options: -P chefdk
+  chef_omnibus_root: /opt/chefdk
+
+verifier:
+ ruby_bindir: /opt/chefdk/embedded/bin
+
+platforms:
+  - name: centos-6.7
+
+suites:
+  - name: essentials
+    run_list:
+      - "recipe[workstations::essentials]"
+    attributes:
+  - name: compliance
+    run_list:
+      - "recipe[workstations::compliance]"
+    attributes:
+  - name: tdd_cookbook_development
+    run_list:
+      - "recipe[workstations::tdd_cookbook_development]"
+    attributes:

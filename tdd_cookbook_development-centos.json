@@ -17,14 +17,14 @@
     "instance_type": "t1.micro",
     "source_ami": "ami-c10044a4",
     "ssh_username": "root",
-    "ami_name": "CentOS 6.7 chef-essentials-4.1.0"
+    "ami_name": "CentOS 6.7 tdd-cookbook_development-1.0.0"
   }],
 
   "provisioners": [{
     "type": "chef-solo",
     "install_command": "curl -L https://www.chef.io/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s -- -P chefdk",
     "cookbook_paths": ["cookbooks"],
-    "run_list": ["workstations::essentials"]
+    "run_list": ["workstations::tdd_cookbook_development"]
 
   }]
 }
