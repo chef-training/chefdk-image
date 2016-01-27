@@ -1,0 +1,91 @@
+I, [2015-12-15T13:42:28.102387 #45315]  INFO -- centos-centos-67: -----> Verifying <centos-centos-67>...
+I, [2015-12-15T13:42:28.102758 #45315]  INFO -- centos-centos-67: Preparing files for transfer
+I, [2015-12-15T13:42:28.491498 #45315]  INFO -- centos-centos-67: -----> Installing Busser (busser)
+I, [2015-12-15T13:42:31.794534 #45315]  INFO -- centos-centos-67: WARNING:  You don't have /home/vagrant/.chefdk/gem/ruby/2.1.0/bin in your PATH,
+I, [2015-12-15T13:42:31.794592 #45315]  INFO -- centos-centos-67: 	  gem executables will not run.
+I, [2015-12-15T13:42:31.845207 #45315]  INFO -- centos-centos-67: Successfully installed thor-0.19.0
+I, [2015-12-15T13:42:31.872328 #45315]  INFO -- centos-centos-67: Successfully installed busser-0.7.1
+I, [2015-12-15T13:42:31.872364 #45315]  INFO -- centos-centos-67: 2 gems installed
+I, [2015-12-15T13:42:31.921308 #45315]  INFO -- centos-centos-67: sh: line 23: /tmp/verifier/gems/bin/busser: No such file or directory
+I, [2015-12-15T13:42:31.921388 #45315]  INFO -- centos-centos-67: Installing Busser plugins: busser-serverspec
+I, [2015-12-15T13:42:31.930935 #45315]  INFO -- centos-centos-67: sudo: /tmp/verifier/bin/busser: command not found
+E, [2015-12-15T13:42:31.931807 #45315] ERROR -- centos-centos-67: Verify failed on instance <centos-centos-67>.
+E, [2015-12-15T13:42:31.931910 #45315] ERROR -- centos-centos-67: ------Exception-------
+E, [2015-12-15T13:42:31.931928 #45315] ERROR -- centos-centos-67: Class: Kitchen::ActionFailed
+E, [2015-12-15T13:42:31.931938 #45315] ERROR -- centos-centos-67: Message: SSH exited (1) for command: [sh -c '
+
+BUSSER_ROOT="/tmp/verifier"; export BUSSER_ROOT
+GEM_HOME="/tmp/verifier/gems"; export GEM_HOME
+GEM_PATH="/tmp/verifier/gems"; export GEM_PATH
+GEM_CACHE="/tmp/verifier/gems/cache"; export GEM_CACHE
+ruby="/opt/chefdk/embedded/bin/ruby"
+gem="/opt/chefdk/embedded/bin/gem"
+version="busser"
+gem_install_args="busser --no-rdoc --no-ri"
+busser="sudo -E /tmp/verifier/bin/busser"
+plugins="busser-serverspec"
+
+$gem list busser -i 2>&1 >/dev/null
+if test $? -ne 0; then
+  echo "-----> Installing Busser ($version)"
+  $gem install $gem_install_args
+else
+  echo "-----> Busser installation detected ($version)"
+fi
+
+if test ! -f "$BUSSER_ROOT/bin/busser"; then
+  gem_bindir=`$ruby -rrubygems -e "puts Gem.bindir"`
+  $gem_bindir/busser setup
+fi
+
+echo "       Installing Busser plugins: $plugins"
+$busser plugin install $plugins
+']
+E, [2015-12-15T13:42:31.931950 #45315] ERROR -- centos-centos-67: ---Nested Exception---
+E, [2015-12-15T13:42:31.931959 #45315] ERROR -- centos-centos-67: Class: Kitchen::Transport::SshFailed
+E, [2015-12-15T13:42:31.931968 #45315] ERROR -- centos-centos-67: Message: SSH exited (1) for command: [sh -c '
+
+BUSSER_ROOT="/tmp/verifier"; export BUSSER_ROOT
+GEM_HOME="/tmp/verifier/gems"; export GEM_HOME
+GEM_PATH="/tmp/verifier/gems"; export GEM_PATH
+GEM_CACHE="/tmp/verifier/gems/cache"; export GEM_CACHE
+ruby="/opt/chefdk/embedded/bin/ruby"
+gem="/opt/chefdk/embedded/bin/gem"
+version="busser"
+gem_install_args="busser --no-rdoc --no-ri"
+busser="sudo -E /tmp/verifier/bin/busser"
+plugins="busser-serverspec"
+
+$gem list busser -i 2>&1 >/dev/null
+if test $? -ne 0; then
+  echo "-----> Installing Busser ($version)"
+  $gem install $gem_install_args
+else
+  echo "-----> Busser installation detected ($version)"
+fi
+
+if test ! -f "$BUSSER_ROOT/bin/busser"; then
+  gem_bindir=`$ruby -rrubygems -e "puts Gem.bindir"`
+  $gem_bindir/busser setup
+fi
+
+echo "       Installing Busser plugins: $plugins"
+$busser plugin install $plugins
+']
+E, [2015-12-15T13:42:31.931977 #45315] ERROR -- centos-centos-67: ------Backtrace-------
+E, [2015-12-15T13:42:31.931985 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/verifier/base.rb:79:in `rescue in call'
+E, [2015-12-15T13:42:31.931994 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/verifier/base.rb:82:in `call'
+E, [2015-12-15T13:42:31.932002 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/instance.rb:398:in `block in verify_action'
+E, [2015-12-15T13:42:31.932019 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/instance.rb:488:in `call'
+E, [2015-12-15T13:42:31.932029 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/instance.rb:488:in `synchronize_or_call'
+E, [2015-12-15T13:42:31.932038 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/instance.rb:453:in `block in action'
+E, [2015-12-15T13:42:31.932047 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/2.1.0/benchmark.rb:279:in `measure'
+E, [2015-12-15T13:42:31.932055 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/instance.rb:452:in `action'
+E, [2015-12-15T13:42:31.932093 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/instance.rb:394:in `verify_action'
+E, [2015-12-15T13:42:31.932102 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/instance.rb:341:in `block in transition_to'
+E, [2015-12-15T13:42:31.932110 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/instance.rb:340:in `each'
+E, [2015-12-15T13:42:31.932119 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/instance.rb:340:in `transition_to'
+E, [2015-12-15T13:42:31.932127 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/instance.rb:160:in `verify'
+E, [2015-12-15T13:42:31.932135 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/command.rb:176:in `public_send'
+E, [2015-12-15T13:42:31.932144 #45315] ERROR -- centos-centos-67: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2/lib/kitchen/command.rb:176:in `block (2 levels) in run_action'
+E, [2015-12-15T13:42:31.932152 #45315] ERROR -- centos-centos-67: ----------------------

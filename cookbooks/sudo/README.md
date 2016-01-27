@@ -17,7 +17,7 @@ Attributes
 - `node['authorization']['sudo']['groups']` - groups to enable sudo access (default: `[ "sysadmin" ]`)
 - `node['authorization']['sudo']['users']` - users to enable sudo access (default: `[]`)
 - `node['authorization']['sudo']['passwordless']` - use passwordless sudo (default: `false`)
-- `node['authorization']['sudo']['include_sudoers_d']` - include and manager `/etc/sudoers.d` (default: `false`)
+- `node['authorization']['sudo']['include_sudoers_d']` - include and manage `/etc/sudoers.d` (default: `false`)
 - `node['authorization']['sudo']['agent_forwarding']` - preserve `SSH_AUTH_SOCK` when sudoing (default: `false`)
 - `node['authorization']['sudo']['sudoers_defaults']` - Array of `Defaults` entries to configure in `/etc/sudoers`
 
@@ -239,6 +239,18 @@ case it is not already</td>
       <td></td>
     </tr>
     <tr>
+      <td>env_keep_add</td>
+      <td>array of strings to add to env_keep</td>
+      <td><tt>['HOME', 'MY_ENV_VAR MY_OTHER_ENV_VAR']</tt></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>env_keep_subtract</td>
+      <td>array of strings to remove from env_keep</td>
+      <td><tt>['DISPLAY', 'MY_SECURE_ENV_VAR']</tt></td>
+      <td></td>
+    </tr>
+    <tr>
       <td>variables</td>
       <td>the variables to pass to the custom template</td>
       <td><tt>:commands => ['/etc/init.d/tomcat restart']</tt></td>
@@ -256,7 +268,7 @@ This section details "quick development" steps. For a detailed explanation, see 
 
 1. Clone this repository from GitHub:
 
-        $ git clone git@github.com:opscode-cookbooks/sudo.git
+        $ git clone git@github.com:chef-cookbooks/sudo.git
 
 2. Create a git branch
 
@@ -286,12 +298,12 @@ This section details "quick development" steps. For a detailed explanation, see 
 License and Authors
 -------------------
 - Author:: Bryan W. Berry <bryan.berry@gmail.com>
-- Author:: Adam Jacob <adam@opscode.com>
-- Author:: Seth Chisamore <schisamo@opscode.com>
+- Author:: Adam Jacob <adam@chef.io>
+- Author:: Seth Chisamore <schisamo@chef.io>
 - Author:: Seth Vargo <sethvargo@gmail.com>
 
 ```text
-Copyright 2009-2012, Opscode, Inc.
+Copyright 2009-2012, Chef Software, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

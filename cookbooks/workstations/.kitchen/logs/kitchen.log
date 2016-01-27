@@ -1,0 +1,3 @@
+I, [2016-01-27T16:32:50.143321 #17411]  INFO -- Kitchen: -----> Starting Kitchen (v1.4.2)
+I, [2016-01-27T16:32:52.993630 #17411]  INFO -- Kitchen: -----> Verifying <tdd-cookbook-development-centos-67>...
+I, [2016-01-27T16:32:59.292195 #17411]  INFO -- Kitchen: -----> Kitchen is finished. (0m9.15s)

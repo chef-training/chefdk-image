@@ -37,7 +37,7 @@ $ export TRAINING_AWS_KEYPAIR=/Users/franklinwebber/.ssh/training-ec2-keypair.pe
 * Essentials Image
 
 ```
-# CentOS 6.7
+# Validate and then build the Essentials Workstation for CentOS 6.7
 $ packer validate essentials-centos.json
 $ packer build essentials-centos.json
 ```
@@ -45,7 +45,15 @@ $ packer build essentials-centos.json
 * Compliance Image
 
 ```
-# CentOS 6.7
+# Validate and then build the Compliance Workstation for CentOS 6.7
 $ packer validate compliance-centos.json
 $ packer build compliance-centos.json
+```
+
+* TDD Cookbook Development Image
+
+```
+# Validate and then build the TDD Cookbook Development Workstation for CentOS 6.7
+$ packer validate tdd_cookbook_development-centos.json
+$ packer build tdd_cookbook_development-centos.json
 ```

@@ -7,3 +7,4 @@ long_description 'Installs/Configures workstations'
 version '0.1.0'
 
 depends 'sudo'
+depends 'chef-ingredient'
