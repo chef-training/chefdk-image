@@ -14,15 +14,15 @@
     "ssh_private_key_file": "{{user `aws_keypair_file`}}",
     "region": "us-east-1",
     "ami_regions": [ "us-west-1", "eu-west-1" ],
-    "instance_type": "t1.micro",
+    "instance_type": "m3.medium",
     "source_ami": "ami-c10044a4",
     "ssh_username": "root",
-    "ami_name": "CentOS 6.7 chef-compliance-1.0.1"
+    "ami_name": "CentOS 6.7 chef-compliance-1.0.2"
   }],
 
   "provisioners": [{
     "type": "chef-solo",
-    "install_command": "curl -L https://www.chef.io/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s -- -P chefdk",
+    "install_command": "curl -L https://www.chef.io/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s",
     "cookbook_paths": ["cookbooks"],
     "run_list": ["workstations::centos"]
 
