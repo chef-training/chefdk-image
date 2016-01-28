@@ -16,14 +16,14 @@
     "instance_type": "m3.medium",
     "source_ami": "ami-c10044a4",
     "ssh_username": "root",
-    "ami_name": "CentOS 6.7 chef-compliance-1.0.2"
+    "ami_name": "Compliance - CentOS 6.7 - 1.0.3"
   }],
 
   "provisioners": [{
     "type": "chef-solo",
     "install_command": "curl -L https://www.chef.io/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s",
     "cookbook_paths": ["cookbooks"],
-    "run_list": ["workstations::centos"]
+    "run_list": ["workstations::compliance"]
 
   }]
 }
