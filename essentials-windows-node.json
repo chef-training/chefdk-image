@@ -1,0 +1,27 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "aws_keypair": "{{env `TRAINING_AWS_KEYPAIR`}}"
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "communicator": "winrm",
+    "region": "us-east-1",
+    "user_data_file":"./scripts/winrm.ps1",
+    "winrm_port": 5985,
+    "source_ami": "ami-9a0558f0",
+    "instance_type": "m3.large",
+    "winrm_username": "Administrator",
+    "ami_name": "Essentials - Windows 2012 Node - 1.0.2"
+  }],
+
+  "provisioners": [
+    {
+      "type" : "powershell",
+      "scripts" : [
+        "./scripts/essentials-windows-node.ps1"
+      ]
+    }
+  ]
+}

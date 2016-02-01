@@ -42,6 +42,24 @@ $ packer validate essentials-centos.json
 $ packer build essentials-centos.json
 ```
 
+* Essentials - Windows Workstation Image
+
+> NOTE: WARNING this is currently not working! This script is unable to execute; it FAILS!
+
+```
+# Validate and then build the Essentials - Node
+$ packer validate essentials-windows-workstation.json
+$ packer build essentials-windows-workstation.json
+```
+
+* Essentials - Windows Node Image
+
+```
+# Validate and then build the Essentials - Node
+$ packer validate essentials-windows-node.json
+$ packer build essentials-windows-node.json
+```
+
 * Compliance Image
 
 ```
