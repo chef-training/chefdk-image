@@ -1,8 +1,8 @@
 # Creates Chef Development Kit enhanced Amazon Machine Instances (AMI)
 
-This project contains a number of Packer files that allow for quick creation of an AMI, installation with necessary tools, and the distribution of the AMI to various regions within a specific AWS account.
+This project contains a number of Packer files, scripts and recipes that allow for the creation and configuration of AMI for the training interventions we offer at Chef.
 
-Creating an AMI is necessary if the core requirements of what is required for the instance changes. Currently these images are created with the following [criteria](https://github.com/chef-training/chefdk-image/blob/master/cookbooks/essentials/test/integration/default/serverspec/default_spec.rb).
+## Setup
 
 \1. Get AWS Credentials
 
@@ -26,9 +26,11 @@ aws_secret_access_key = SECRET_ACCESS_KEY
 $ export TRAINING_AWS_KEYPAIR=/Users/franklinwebber/.ssh/training-ec2-keypair.pem
 ```
 
-\4. Install [Packer 0.8.1](https://www.packer.io/downloads.html)
+\4. Install [Packer](https://www.packer.io/downloads.html). At least 0.8.1.
 
-\5. Run `packer` to create the AMI
+## Creating AMI
+
+Run `packer` to create the AMI
 
 > This is an example of using packer to creating an image for CentOS.
 
@@ -37,17 +39,17 @@ $ export TRAINING_AWS_KEYPAIR=/Users/franklinwebber/.ssh/training-ec2-keypair.pe
 * Essentials Image
 
 ```
-# Validate and then build the Essentials Workstation for CentOS 6.7
+# Validate and then build the Essentials - CentOS 6.7 Workstation
 $ packer validate essentials-centos.json
 $ packer build essentials-centos.json
 ```
 
 * Essentials - Windows Workstation Image
 
-> NOTE: WARNING this is currently not working! This script is unable to execute; it FAILS!
+NOTE: WARNING this is currently not working! This script is unable to execute; it FAILS!
 
 ```
-# Validate and then build the Essentials - Node
+# Validate and then build the Essentials - Windows Workstation
 $ packer validate essentials-windows-workstation.json
 $ packer build essentials-windows-workstation.json
 ```
@@ -55,23 +57,44 @@ $ packer build essentials-windows-workstation.json
 * Essentials - Windows Node Image
 
 ```
-# Validate and then build the Essentials - Node
+# Validate and then build the Essentials - Windows Node
 $ packer validate essentials-windows-node.json
 $ packer build essentials-windows-node.json
 ```
 
-* Compliance Image
+* Compliance - CentOS Image
 
 ```
-# Validate and then build the Compliance Workstation for CentOS 6.7
+# Validate and then build the CentOS 6.7 Compliance Node
 $ packer validate compliance-centos.json
 $ packer build compliance-centos.json
+```
+
+* Compliance - Windows Image
+
+NOTE: WARNING this is currently not working! This script is unable to execute; it FAILS!
+
+```
+# Validate and then build the Windows 2012 Compliance Node
+$ packer validate compliance-windows.json
+$ packer build compliance-windows.json
 ```
 
 * TDD Cookbook Development Image
 
 ```
-# Validate and then build the TDD Cookbook Development Workstation for CentOS 6.7
+# Validate and then build the TDD Cookbook Development CentOS 6.7 Workstation
 $ packer validate tdd_cookbook_development-centos.json
 $ packer build tdd_cookbook_development-centos.json
 ```
+
+## Known Issues
+
+### Windows Nodes and Workstations
+
+The current version of Packer (0.8.6) does not successfully allow you to use Chef cookbook recipes in the creation of Windows AMIs. To address that issue I started to develop the configuration management in simple PowerShell scripts. However, one of the scripts that installs a lot of the necessary components fails to run when executed through Packer. This means to regenerate a Windows AMI one must:
+
+* Launch a clean Windows 2012R2 Instance
+* Login to that Instance
+* Run the WinRM script (`scripts/winrm.ps1`)
+* Run the specific script for the target (e.g. `scripts/compliance-windows.ps1`)
