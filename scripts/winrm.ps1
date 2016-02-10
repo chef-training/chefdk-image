@@ -4,8 +4,6 @@ write-host "(host) Running User Data Script"
 
 Set-ExecutionPolicy -ExecutionPolicy bypass -Force
 
-# WinRM
-# WinRM
 write-output "Setting up WinRM"
 write-host "(host) setting up WinRM"
 
