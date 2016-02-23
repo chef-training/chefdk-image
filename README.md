@@ -36,7 +36,7 @@ Run `packer` to create the AMI
 
 > NOTE: Each packer file contains a version number within it. When you need to create a new version of the Packer image you will need to update this packer file version or you may received an error because of a conflict of version numbers.
 
-* Essentials Image
+* Essentials - CentOS Workstation Image
 
 ```
 # Validate and then build the Essentials - CentOS 6.7 Workstation

@@ -7,7 +7,7 @@
 chef_ingredient 'chefdk' do
   action :install
   channel :stable
-  version '0.10.0'
+  version '0.11.0'
 end
 
 include_recipe "#{cookbook_name}::centos-chef_user"
@@ -17,11 +17,14 @@ include_recipe "#{cookbook_name}::centos-chef_user"
 # because sometimes the packages will fail to install because of a
 # stale package repository.
 #
-# @note This command is not idempotent. A better command may existin within the yum cookbook.
+# @note This command is not idempotent. A better command may exist within the yum cookbook.
 #
 execute "yum update -y"
 
-packages_attendees_will_install = %w[ vim nano emacs git ]
+needed_packages_for_attendees = %w[ vim nano emacs ]
+package needed_packages_for_attendees
+
+packages_attendees_will_install = %w[ cowsay git tree ]
 package packages_attendees_will_install do
   action :remove
 end
@@ -29,5 +32,7 @@ end
 include_recipe "#{cookbook_name}::centos-docker"
 
 include_recipe "#{cookbook_name}::centos-permissions"
+
+include_recipe "#{cookbook_name}::centos-ssh_config"
 
 include_recipe "#{cookbook_name}::centos-ec2_hints"

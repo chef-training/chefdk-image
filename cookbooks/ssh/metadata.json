@@ -1,0 +1,43 @@
+{
+  "name": "ssh",
+  "description": "LWRPs for managing SSH known_hosts and config files",
+  "long_description": "# Chef SSH\n\n## Description\n\nProvides 3 LWRPs to manage system-wide and per-user `ssh_config` and `known_host` files.\n\n## Setup\n\nInclude the `ssh` cookbook via Berkshelf or Librarian.\n\n    cookbook \"ssh\"\n\nOr add the following line to your cookbook's `metadata.rb`.\n\n    depends \"ssh\"\n\n## Usage\n\nWhen using SSH with Chef deployments, it's crucial to not get any prompts for input. Adding entries to `known_hosts` files and better managing your per-connection configuration can help with this.\n\nAn important thing to note is that if you create a user during a chef run, be sure to reload OHAI data so that the new user will be in the node data. For instance:\n\n    ohai \"reload_passwd\" do\n        plugin \"passwd\"\n    end\n\nThe ssh cookbook bypasses this need somewhat by using ohai classes directly to discover your users' ssh paths.  However\nsome of your cookbooks may not be as generous.\n\n## Resources and Providers\n\n### known_hosts\n\n#### Actions\n\n<table>\n  <thead>\n    <tr>\n      <th>Action</th><th>Description</th><th>Default</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>add</td>\n      <td>Adds an entry for the given host to a `known_hosts` file</td>\n      <td>Yes</td>\n    </tr>\n    <tr>\n      <td>remove</td>\n      <td>Removes entries for a host from a `known_hosts` file</td>\n      <td>&nbsp;</td>\n  </tbody>\n</table>\n\n#### Attributes\n\n<table>\n  <thead>\n    <tr>\n      <th>Attribute</th><th>Description</th><th>Default Value</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>host</td>\n      <td>\n        <b>Name attribute:</b> the FQDN for a host to add to a `known_hosts` file\n      </td>\n      <td><code>nil</code></td>\n    </tr>\n    <tr>\n      <td>hashed</td>\n      <td>A Boolean indicating if SSH is configured to use a hashed `known_hosts` file.\n      </td>\n      <td><code>true</code></td>\n    </tr>\n    <tr>\n      <td>key</td>\n      <td>A full line to add to the file, instead of performing a lookup for the host.\n      </td>\n      <td><code>nil</code></td>\n    </tr>\n    <tr>\n      <td>user</td>\n      <td>A username to add the `known_hosts` entry for. If unspecified, the known_host will be added system-wide. <b>Note:</b> if specified, the user\n        must already exist.\n      </td>\n      <td><code>nil</code></td>\n    </tr>\n    <tr>\n      <td>path</td>\n      <td>A full path to a known_hosts file. If used with the `user` attribute, this will take precedence over the path to a user's file, but the file will be created (if necessary) as that user.\n      </td>\n      <td><code>nil</code></td>\n    </tr>\n  </tbody>\n</table>\n\n#### Example\n\n    ssh_known_hosts \"github.com\" do\n      hashed true\n      user 'webapp'\n    end\n\n\n### config\n\n#### Actions\n\n<table>\n  <thead>\n    <tr>\n      <th>Action</th><th>Description</th><th>Default</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>add</td>\n      <td>Adds an entry for the given host to a `ssh_config` file</td>\n      <td>Yes</td>\n    </tr>\n    <tr>\n      <td>remove</td>\n      <td>Removes entries for a host from a `ssh_config` file</td>\n      <td>&nbsp;</td>\n  </tbody>\n</table>\n\n#### Attributes\n\n<table>\n  <thead>\n    <tr>\n      <th>Attribute</th><th>Description</th><th>Default Value</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>host</td>\n      <td>\n        <b>Name attribute:</b> the string to match when connecting to a host. This can be an IP, FQDN (github.com), or contain wildcards (*.prod.corp)\n      </td>\n      <td><code>nil</code></td>\n    </tr>\n    <tr>\n      <td>options</td>\n      <td>A hash containing the key-values to write for the host in\n      </td>\n      <td><code>true</code></td>\n    </tr>\n    <tr>\n      <td>user</td>\n      <td>A username to add the `ssh_config` entry for. If unspecified, the entry will be added system-wide. <b>Note:</b> if specified, the user\n        must already exist.\n      </td>\n      <td><code>nil</code></td>\n    </tr>\n    <tr>\n      <td>path</td>\n      <td>A full path to a ssh config file. If used with the `user` attribute, this will take precedence over the path to a user's file, but the file will be created (if necessary) as that user.\n      </td>\n      <td><code>nil</code></td>\n    </tr>\n  </tbody>\n</table>\n\n#### Example\n\n    ssh_config \"github.com\" do\n      options 'User' => 'git', 'IdentityFile' => '/var/apps/github_deploy_key'\n      user 'webapp'\n    end\n\n### authorized_keys\nThe authorized_keys LWRP is considered _Beta_ due to the lack of tests for this resource.  Use at your own risk,\nand feel free to submit a PR for adding more tests.\n\nAlso of important note, typically when SSH keys are generated, the resulting file will have the type, key, and a comment.\nThe typical comment is just the `username@host`.  This is __NOT__ part of the key.  When setting your attributes,\nplease be sure to set only the key in the `key` field.  See the example if you are still uncertain.\n\n#### Actions\n\n<table>\n  <thead>\n    <tr>\n      <th>Action</th><th>Description</th><th>Default</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>add</td>\n      <td>Adds an entry to the given user's authorized_keys file</td>\n      <td>Yes</td>\n    </tr>\n    <tr>\n      <td>remove</td>\n      <td>Removes an entry from the given user's authorized_keys file</td>\n      <td>&nbsp;</td>\n    <\\tr>\n    <tr>\n      <td>modify</td>\n      <td>Updates an existing entry to the user's authorized_keys file, but only if the indicated `key` is present</td>\n      <td>&nbsp;</td>\n    <\\tr>\n  </tbody>\n</table>\n\n__* please note that there is no `name` attribute for this resource.  The name you assign is not used in the provider__\n\n#### Attributes\n\n<table>\n  <thead>\n    <tr>\n      <th>Attribute</th><th>Description</th><th>Default Value</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>type</td>\n      <td>\n        A string representing the type of key.  Options include `id-rsa, ssh-dss, ssh-ed25519` and others\n      </td>\n      <td><code>id-rsa</code></td>\n    </tr>\n    <tr>\n      <td>options</td>\n      <td>\n        A hash containing the key-value pairs for options.  Binary options such as `no-port-forwarding` should have a value of `nil`\n      </td>\n      <td><code>{}</code></td>\n    </tr>\n    <tr>\n      <td>user</td>\n      <td>\n        The user for which this key should be added\n      </td>\n      <td>none - __REQUIRED__</td>\n    </tr>\n     <tr>\n      <td>comment</td>\n      <td>\n        a comment to add to this entry (generally the `useranme@host` is added as a comment, but this is not required)\n      </td>\n      <td><code>''</code></td>\n    </tr>\n    <tr>\n      <td>key</td>\n      <td>\n        the actual key\n      </td>\n      <td>none - __REQUIRED__</td>\n    </tr>\n  </tbody>\n</table>\n\n#### Example\n\n<syntaxhightlight lang=\"ruby\">\nssh_authorized_keys \"for remote access\" do\n  options { 'cert-authority' => nil, :command => '/usr/bin/startup' }\n  user 'admin'\n  key 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDzB76TOkrDRaevO3I1qzosRXliAuYdjcMejHwwL5v2hRqTrBePlMW6nqz8/JgLTzHn/KxzkrKLb0GlpPDrJ1KByWGYZsfydUfv7n1+5ogoA7UW7dUc4DoQtGPuy4Xe0enr88VfALlT11aWKAw8K/I39zWiPvJNX3Mks0f3/3smjLaQEnDWWWiawp5YgzJmyzsqZFZrrFCUgv7AP1EjZofWUcRvYEEjMhKsK+G2H2VCN7MpH0cJ97E0bKNQjHBrwGyMLQZUOndGakCuOuTLpikOXSpUUz5LwqCiRIj6iUtWevwk+AYLZwxPYQpCxFceVFDhPDaJQ85vweSq+HEg7hRujq9jO7vM9LIgjqg7fwQ2Ql6zO9NjXv2UalzBi0H2AbKT1V/PpNufPgolyb/dK7Jqpqu7Ytggctl2fGyLe8yVaC9gD+/BBeCl82LZI142kdXmf4WYcZgOgcRgGJrbSZjeMzX6zZpiD1AG3T7xyEn2twmC/TqptmQEAG2BBzGum+S6pU0rnOt2UJngRnviK2vptAWtRlSlsopySOXv+VbqUXhRjHRT/+2nq5Q4BWcjsZaaoo1uWh2glATRnGK995A1zJ3gWrBA+IaC6stKzjSG0KPwLjzHfPKbWjDX76D/qdo0qBN5hBiHDRfmiNqpNYS9NHACDZNVPBS5N1d5BUkyKw=='\n  type 'id-rsa'\n  comment 'gdidy@coolman.com'\nend\n</syntaxhighlight>\n",
+  "maintainer": "Tejay Cardon",
+  "maintainer_email": "tejay.cardon@gmail.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "ubuntu": ">= 0.0.0",
+    "rhel": ">= 0.0.0"
+  },
+  "dependencies": {
+
+  },
+  "recommendations": {
+
+  },
+  "suggestions": {
+
+  },
+  "conflicting": {
+
+  },
+  "providing": {
+
+  },
+  "replacing": {
+
+  },
+  "attributes": {
+
+  },
+  "groupings": {
+
+  },
+  "recipes": {
+
+  },
+  "version": "0.10.10",
+  "source_url": "",
+  "issues_url": "",
+  "privacy": false
+}

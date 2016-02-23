@@ -1,9 +1,9 @@
 
 describe user('chef') do
   it { should exist }
-  its(:home) { should eq '/home/chef' }
-  its(:shell) { should eq '/bin/bash' }
-  its(:groups) { should eq [ 'chef', 'dockerroot' ] }
+  its(:home) { should eq('/home/chef') }
+  its(:shell) { should eq('/bin/bash') }
+  its(:groups) { should eq([ 'chef', 'dockerroot' ]) }
 end
 
 describe file('/etc/chef/client.pem') do
@@ -37,15 +37,15 @@ describe file("/etc/chef/ohai/hints/ec2.json") do
 end
 
 describe command('chef-apply --help') do
-  its(:exit_status) { should eq 0 }
+  its(:exit_status) { should eq(0) }
 end
 
 describe command('chef --help') do
-  its(:exit_status) { should eq 0 }
+  its(:exit_status) { should eq(0) }
 end
 
 describe command('kitchen --help') do
-  its(:exit_status) { should eq 0 }
+  its(:exit_status) { should eq(0) }
 end
 
 describe command('sudo su -l -c "chef gem list kitchen-docker" -s /bin/bash chef') do
@@ -53,14 +53,18 @@ describe command('sudo su -l -c "chef gem list kitchen-docker" -s /bin/bash chef
 end
 
 describe package("vim-enhanced") do
-  it { should_not be_installed }
+  it { should be_installed }
 end
 
 describe package("emacs") do
-  it { should_not be_installed }
+  it { should be_installed }
 end
 
 describe package("nano") do
+  it { should be_installed }
+end
+
+describe package("cowsay") do
   it { should_not be_installed }
 end
 
@@ -74,4 +78,9 @@ end
 
 describe command('sudo su -l -c "which ruby" -s /bin/bash chef') do
   its(:stdout) { should match(%r{/opt/chefdk/embedded/bin/ruby}) }
+end
+
+describe ssh_config do
+  its('MaxSessions') { should eq('250') }
+  its('MaxStartups') { should eq('250') }
 end
