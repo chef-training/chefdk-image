@@ -16,7 +16,7 @@
     "instance_type": "m3.medium",
     "source_ami": "ami-c10044a4",
     "ssh_username": "root",
-    "ami_name": "Compliance - CentOS 6.7 - 1.0.3"
+    "ami_name": "Compliance - CentOS 6.7 - 1.0.4"
   }],
 
   "provisioners": [{

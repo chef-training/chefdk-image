@@ -7,8 +7,10 @@
 chef_ingredient 'chefdk' do
   action :install
   channel :stable
-  version '0.10.0'
+  version '0.11.2'
 end
+
+execute "chef exec gem install inspec -v 0.14.2"
 
 include_recipe "#{cookbook_name}::centos-chef_user"
 
