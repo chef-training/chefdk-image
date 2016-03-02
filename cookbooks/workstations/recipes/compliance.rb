@@ -10,9 +10,14 @@ chef_ingredient 'chefdk' do
   version '0.11.2'
 end
 
-execute "chef exec gem install inspec -v 0.14.2"
-
 include_recipe "#{cookbook_name}::centos-chef_user"
+
+#
+# @note install a later version than inspec gem for the chef user. This workaround was
+#       required to get the right user to have it installed. Without it the root
+#       user was getting the kitchen-docker gem
+#
+execute 'sudo su -c "chef exec gem install inspec -v 0.14.07" -s /bin/sh chef'
 
 #
 # Ensure the package repository is all up-to-date. This is essential

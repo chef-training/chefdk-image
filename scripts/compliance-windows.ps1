@@ -31,4 +31,4 @@ Set-ItemProperty . -Name Path -Value $PathWithInSpec
 Pop-Location
 
 # Update the InSpec Version to one that is known to work on Windows
-Invoke-Expression "chef gem install inspec -v 0.14.2"
+Invoke-Expression "chef gem install inspec -v 0.14.7"
