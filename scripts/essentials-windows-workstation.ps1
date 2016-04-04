@@ -14,3 +14,18 @@ Write-Output "Execute Nordstrom ChefDK Bootstrap"
 
 Write-Output "Installing Kitchen EC2 Gem"
 Invoke-Expression "chef gem install kitchen-ec2"
+
+# Install ConEmu
+Invoke-Expression "C:\ProgramData\chocolatey\bin\choco install conemu -y"
+
+# Append Chef Development Kit (ChefDK) Embedded Bin to the PATH
+
+$LocalMachinePathRegKey = 'HKLM:\System\CurrentControlSet\Control\Session Manager\Environment'
+$ChefDkEmbeddedBin = 'C:\opscode\chefdk\embedded\bin'
+
+Push-Location
+Set-Location $LocalMachinePathRegKey
+$CurrentPath = (Get-ItemProperty . Path).Path
+$PathWithInSpec = "$CurrentPath;$ChefDkEmbeddedBin"
+Set-ItemProperty . -Name Path -Value $PathWithInSpec
+Pop-Location
