@@ -16,6 +16,7 @@ platforms:
     driver_config:
       aws_ssh_key_id: training-ec2-keypair.pem
       image_id: ami-c10044a4
+  - name: centos-7.1
 
 suites:
   - name: essentials
@@ -29,4 +30,8 @@ suites:
   - name: tdd_cookbook_development
     run_list:
       - "recipe[workstations::tdd_cookbook_development]"
+    attributes:
+  - name: workshop_tomcat
+    run_list:
+      - "recipe[workstations::workshop_tomcat]"
     attributes:

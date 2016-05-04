@@ -16,6 +16,19 @@
 #
 execute "sed 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh_config > /etc/ssh_config"
 
+
+#
+# CentOS 7.1
+#
+
+template '/etc/ssh/ssh_config' do
+  source 'ssh_config.erb'
+end
+
+template '/etc/ssh/sshd_config' do
+  source 'sshd_config.erb'
+end
+
 #
 # Stop and disable iptables.
 #
