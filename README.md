@@ -4,6 +4,8 @@ This project contains a number of Packer files, scripts and recipes that allow f
 
 ## Setup
 
+> This is a [video](https://drive.google.com/a/opscode.com/file/d/0B1nt6eQeCbyRXzFMV1hHcFhuSFE/view?usp=sharing) that describes these setup procedures.
+
 \1. Get AWS Credentials
 
 > You will need an AWS Access Key, AWS Secret Key, and a Key Pair (AKA access_key, secret_key, key pair)
