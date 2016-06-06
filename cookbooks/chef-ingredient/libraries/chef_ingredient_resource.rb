@@ -27,7 +27,7 @@ class Chef
 
       # Attributes for determining what version to install from which channel
       attribute :version, kind_of: [String, Symbol], default: :latest
-      attribute :channel, kind_of: Symbol, default: :stable, equal_to: [:current, :stable]
+      attribute :channel, kind_of: Symbol, default: :stable, equal_to: [:current, :stable, :unstable]
 
       # Attribute to install package from local file
       attribute :package_source, kind_of: String, default: nil
@@ -38,6 +38,13 @@ class Chef
       # Attributes for package resources used on rhel and debian platforms
       attribute :options, kind_of: String
       attribute :timeout, kind_of: [Integer, String, NilClass], default: nil
+
+      # Attribute to accept the license when applicable
+      attribute :accept_license, kind_of: [TrueClass, FalseClass], default: false
+
+      # Attribute to enable selecting packages built for earlier versions in
+      # platforms that are not yet officially added to Chef support matrix
+      attribute :platform_version_compatibility_mode, kind_of: [TrueClass, FalseClass], default: false
     end
   end
 end

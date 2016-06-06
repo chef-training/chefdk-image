@@ -4,18 +4,10 @@ DEPENDENCIES
     metadata: true
 
 GRAPH
-  apt (2.9.2)
-  apt-chef (0.2.2)
-    apt (>= 0.0.0)
-  chef-ingredient (0.16.0)
-    apt-chef (>= 0.2.0)
-    yum-chef (>= 0.2.0)
+  chef-ingredient (0.18.4)
   ssh (0.10.10)
   sudo (2.7.2)
   workstations (0.1.0)
     chef-ingredient (>= 0.0.0)
     ssh (>= 0.0.0)
     sudo (>= 0.0.0)
-  yum (3.9.0)
-  yum-chef (0.2.2)
-    yum (>= 3.2)
