@@ -10,6 +10,12 @@
 # employing a remote-sync plugin the number of max sessions and max startups
 # needs to be increased to allow lots of file copies to happen simultaneously.
 #
-ssh_config "*" do
-  options 'MaxSessions' => '250', 'MaxStartups' => '250'
+append_if_no_line "Update max sessions" do
+  path "/etc/ssh/sshd_config"
+  line "MaxSessions 250"
+end
+
+append_if_no_line "Update max startups" do
+  path "/etc/ssh/sshd_config"
+  line "MaxStartups 250"
 end
