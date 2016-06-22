@@ -6,7 +6,7 @@
 
 require 'spec_helper'
 
-describe 'workstations::centos-ssh_config' do
+describe 'workstations::centos-sshd_config' do
   context 'When all attributes are default, on an unspecified platform' do
     let(:chef_run) do
       runner = ChefSpec::ServerRunner.new

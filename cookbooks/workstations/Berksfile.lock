@@ -5,9 +5,11 @@ DEPENDENCIES
 
 GRAPH
   chef-ingredient (0.18.4)
+  line (0.6.3)
   ssh (0.10.10)
   sudo (2.7.2)
   workstations (0.1.0)
     chef-ingredient (>= 0.0.0)
+    line (>= 0.0.0)
     ssh (>= 0.0.0)
     sudo (>= 0.0.0)
