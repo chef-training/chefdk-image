@@ -80,7 +80,10 @@ describe command('sudo su -l -c "which ruby" -s /bin/bash chef') do
   its(:stdout) { should match(%r{/opt/chefdk/embedded/bin/ruby}) }
 end
 
-describe ssh_config do
+describe sshd_config do
   its('MaxSessions') { should eq('250') }
+end
+
+describe sshd_config do
   its('MaxStartups') { should eq('250') }
 end

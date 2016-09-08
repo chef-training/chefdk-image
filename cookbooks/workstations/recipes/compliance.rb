@@ -16,18 +16,10 @@ execute "yum update -y"
 chef_ingredient 'chefdk' do
   action :install
   channel :stable
-  version '0.11.2'
+  version '0.17.17'
 end
 
 include_recipe "#{cookbook_name}::centos-chef_user"
-
-#
-# @note install a later version than inspec gem for the chef user. This workaround was
-#       required to get the right user to have it installed. Without it the root
-#       user was getting the kitchen-docker gem
-#
-execute 'sudo su -c "chef exec gem install inspec -v 0.22.1" -s /bin/sh chef'
-
 
 needed_packages_for_attendees = %w[ vim nano emacs git tree ]
 package needed_packages_for_attendees
