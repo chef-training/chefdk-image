@@ -13,7 +13,7 @@
     "source_ami": "ami-817d48eb",
     "instance_type": "m3.large",
     "winrm_username": "Administrator",
-    "ami_name": "Essentials - Windows 2012 Workstation - 1.0.7"
+    "ami_name": "Essentials - Windows 2012 Workstation - 1.1.1"
   }],
 
   "provisioners": [
