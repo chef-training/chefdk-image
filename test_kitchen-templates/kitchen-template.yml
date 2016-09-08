@@ -1,0 +1,41 @@
+---
+driver:
+  name: ec2
+  retryable_tries: 120
+  retryable_sleep: 5
+  aws_ssh_key_id: training-ec2-keypair
+  region: us-east-1
+  availability_zone: us-east-1e
+  security_group_ids: sg-d7a564ae
+  subnet_id: subnet-fc6a4cc6
+  instance_type: m3.large
+  tags:
+    # Replace YOURNAME and YOURCOMPANY here
+    Name: "Chef Training Node for YOURNAME, YOURCOMPANY"
+    created-by: "test-kitchen"
+    user: <%= ENV['USER'] %>
+
+provisioner:
+  name: chef_zero
+  cookbook_path: C:\Users\Administrator\cookbooks
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows-2012r2
+    driver_config:
+      image_id: ami-ca82c4a0
+    transport:
+      username: Administrator
+      password: Cod3Can!
+
+suites:
+  - name: default
+    run_list:
+      # Replace with the name of the COOKBOOK
+      - recipe[COOKBOOK::default]
+    verifier:
+      inspec_tests:
+        - test/recipes
+    attributes:
