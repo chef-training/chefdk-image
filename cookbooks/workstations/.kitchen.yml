@@ -2,6 +2,9 @@
 driver:
   name: vagrant
 
+provisioner:
+   name: chef_solo
+
 verifier:
   name: inspec
 
@@ -14,7 +17,7 @@ platforms:
   - name: AMI-centos-6.7
     driver_plugin: ec2
     driver_config:
-      aws_ssh_key_id: training-ec2-keypair.pem
+      aws_ssh_key_id: training-ec2-keypair
       image_id: ami-c10044a4
 
 suites:
@@ -29,4 +32,8 @@ suites:
   - name: tdd_cookbook_development
     run_list:
       - "recipe[workstations::tdd_cookbook_development]"
+    attributes:
+  - name: extending_cookbooks
+    run_list:
+      - "recipe[workstations::extending_cookbooks]"
     attributes:
