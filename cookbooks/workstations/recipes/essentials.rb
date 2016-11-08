@@ -35,4 +35,3 @@ include_recipe "#{cookbook_name}::centos-permissions"
 
 include_recipe "#{cookbook_name}::centos-sshd_config"
 
-include_recipe "#{cookbook_name}::centos-ec2_hints"

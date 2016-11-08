@@ -31,11 +31,6 @@ describe file('/var/run/docker.sock') do
   it { should be_grouped_into 'dockerroot' }
 end
 
-describe file("/etc/chef/ohai/hints/ec2.json") do
-  it { should be_file }
-  its(:content) { should match(/{}/) }
-end
-
 describe command('chef-apply --help') do
   its(:exit_status) { should eq(0) }
 end
