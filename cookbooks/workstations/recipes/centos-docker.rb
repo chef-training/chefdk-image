@@ -47,11 +47,11 @@ include_recipe "#{cookbook_name}::centos-chef_user"
 # Test Kitchen does not automatically ship with the gem that allows it to talk
 # with Docker. This will add the necessary gem for Test Kitchen to use Docker.
 #
-# @note install the kitchen-docker gem for the chef user. This workaround was
-#       required to get the right user to have it installed. Without it the root
-#       user was getting the kitchen-docker gem
-#
-execute 'sudo su -c "chef exec gem install kitchen-docker" -s /bin/sh chef'
+gem_package 'kitchen-docker' do
+  gem_binary '/opt/chefdk/embedded/bin/gem'
+  options '--no-user-install'
+  notifies :restart, 'service[docker]'
+end
 
 #
 # To allow the chef user to properly manage docker for the purposes of
