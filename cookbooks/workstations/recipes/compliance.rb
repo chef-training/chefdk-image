@@ -15,8 +15,6 @@ execute "yum update -y"
 
 chef_ingredient 'chefdk' do
   action :install
-  channel :stable
-  version '0.17.17'
 end
 
 include_recipe "#{cookbook_name}::centos-chef_user"
