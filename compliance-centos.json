@@ -21,7 +21,6 @@
 
   "provisioners": [{
     "type": "chef-solo",
-    "install_command": "curl -L https://www.chef.io/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s",
     "cookbook_paths": ["cookbooks"],
     "run_list": ["workstations::compliance"]
 
