@@ -19,3 +19,25 @@ append_if_no_line "Update max startups" do
   path "/etc/ssh/sshd_config"
   line "MaxStartups 250"
 end
+
+service 'sshd'
+
+template '/etc/ssh/sshd_config' do
+  source 'rhel-sshd_config.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  notifies :restart, "service[sshd]"
+end
+
+directory '/etc/cloud' do
+  recursive true
+end
+
+template '/etc/cloud/cloud.cfg' do
+  source 'cloud.cfg.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+end
+

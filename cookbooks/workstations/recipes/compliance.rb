@@ -26,3 +26,5 @@ include_recipe "#{cookbook_name}::centos-docker"
 
 include_recipe "#{cookbook_name}::centos-permissions"
 
+include_recipe "#{cookbook_name}::centos-sshd_config"
+
