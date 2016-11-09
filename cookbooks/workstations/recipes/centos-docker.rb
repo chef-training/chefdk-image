@@ -5,41 +5,11 @@
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
 #
-# Test Kitchen on AWS requires that Docker is installed.
+# Start the docker service
 #
-# The correct Docker package is not contained in the standard package repository
-# it has to be added through through the Extra Package for Enterprise Linux (EPEL)
-# process.
-#
-# @see https://docs.docker.com/installation/centos/
-
-remote_file "epel-release-6-8.noarch.rpm" do
-  source "http://ftp.osuosl.org/pub/fedora-epel/6/i386/epel-release-6-8.noarch.rpm"
+docker_service 'default' do
+  action [:create, :start]
 end
-
-#
-# Load the EPEL
-#
-# @note This command is not idempotent. This will break the instance if run a second time.
-#
-execute "rpm -ivh epel-release-6-8.noarch.rpm"
-
-#
-# Remove docker if it happens to be installed in the package repository.
-# Because we need to install a different package name on CentOS.
-#
-# @note This command is not idempotent. A better command may existin within the yum cookbook.
-#
-execute "yum -y remove docker"
-
-# Install the correct Docker Package from the EPEL.
-package "docker-io"
-
-# The service name for docker-io is named docker.
-service "docker" do
-  action [ :start, :enable ]
-end
-
 
 include_recipe "#{cookbook_name}::centos-chef_user"
 
@@ -50,25 +20,14 @@ include_recipe "#{cookbook_name}::centos-chef_user"
 gem_package 'kitchen-docker' do
   gem_binary '/opt/chefdk/embedded/bin/gem'
   options '--no-user-install'
-  notifies :restart, 'service[docker]'
+  notifies :restart, 'docker_service[default]'
 end
 
 #
 # To allow the chef user to properly manage docker for the purposes of
 # integration testing with Test Kitchen.
 #
-group 'dockerroot' do
+group 'docker' do
   members 'chef'
+  append true
 end
-
-
-#
-# To allow the chef user to properly manage docker for the purposes of
-# integration testing with Test Kitchen.
-# /var/run/docker.sock
-#
-# file '/var/run/docker.sock' do
-#   owner 'dockerroot'
-# end
-
-execute 'chown root:dockerroot /var/run/docker.sock'
