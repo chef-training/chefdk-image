@@ -16,7 +16,7 @@
     "instance_type": "m3.medium",
     "source_ami": "ami-2051294a",
     "ssh_username": "ec2-user",
-    "ami_name": "Compliance - RedHat 7 - 1.1.1"
+    "ami_name": "Compliance Workshop Workstation - RedHat 7 - 1.2.1"
   }],
 
   "provisioners": [{
