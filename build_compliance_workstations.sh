@@ -2,7 +2,7 @@
 # Builds training instances in EC2
 USAGE="Usage: $0 [number] [name] [department] [contact] [project] [termination-date]"
 
-AMI_ID=ami-352f0d22
+AMI_ID=ami-614d7476
 
 NUMHOSTS=$1
 NAME=$2
