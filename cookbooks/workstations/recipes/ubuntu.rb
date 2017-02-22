@@ -37,11 +37,6 @@ sudo 'chef' do
   template "chef-sudoer.erb"
 end
 
-# To allow the chef user to login to the system through SSH
-# This was easier than grabbing another cookbook
-execute "sed 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config > /etc/ssh/sshd_config"
-
-
 packages_attendees_will_install = %w[ vim nano emacs git ]
 
 packages_attendees_will_install.each do |name|
@@ -50,16 +45,14 @@ packages_attendees_will_install.each do |name|
   end
 end
 
+# SSH config to allow for password login
+service 'ssh'
 
-#
-# These images are being created on EC2 and I have found that often
-# times Ohai is unable to determine that the system is an EC2 instance.
-#
-
-directory '/etc/chef/ohai/hints' do
-  recursive true
+template '/etc/ssh/sshd_config' do
+  source 'debian-sshd_config.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  notifies :restart, "service[ssh]"
 end
 
-file '/etc/chef/ohai/hints/ec2.json' do
-  content '{}'
-end

@@ -1,9 +1,9 @@
 {
   "variables": {
-    "aws_access_key": "",
-    "aws_secret_key": "",
-    "aws_keypair_name": "training-ec2-keypair",
-    "aws_keypair_file": "{{env `TRAINING_AWS_KEYPAIR`}}"
+    "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
+    "aws_keypair_name": "{{env `AWS_KEYPAIR_NAME`}}",
+    "aws_keypair_file": "{{env `AWS_PRIVATE_KEY_PATH`}}"
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -14,14 +14,13 @@
     "ssh_private_key_file": "{{user `aws_keypair_file`}}",
     "region": "us-east-1",
     "instance_type": "m3.medium",
-    "source_ami": "ami-c10044a4",
-    "ssh_username": "root",
-    "ami_name": "Compliance - CentOS 6.7 - 1.0.9"
+    "source_ami": "ami-6d1c2007",
+    "ssh_username": "centos",
+    "ami_name": "Compliance - CentOS 7 - 1.1.1"
   }],
 
   "provisioners": [{
     "type": "chef-solo",
-    "install_command": "curl -L https://www.chef.io/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s",
     "cookbook_paths": ["cookbooks"],
     "run_list": ["workstations::compliance"]
 
