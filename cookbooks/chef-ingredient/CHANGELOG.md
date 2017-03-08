@@ -1,3 +1,55 @@
+# chef-ingredient Cookbook CHANGELOG
+This file is used to list changes made in each version of the chef-ingredient cookbook.
+
+## 1.1.0 (2017-03-01)
+
+- Test with local delivery and not Rake
+- Remove sensitive property for Chef 13 compatibility as this properly is provided by chef-client now for us by any resource and doesn't need to be defined
+- Test in Travis CI with kitchen-dokken and convert tests to InSpec
+
+## 1.0.1 (2017-02-22)
+
+- Testing cleanup for Chef 13 compatibility and testing on the latest platforms
+
+## 1.0.0 (2017-02-15)
+
+- Require Chef 12.5+ and remove compat_resource dependency
+- Use mixlib-install >= 2.1.12 - this brings in an important fix for the `delivery` -> `automate` package rename. See the [Discourse announcement](https://discourse.chef.io/t/chef-automate-install-package-renaming-in-0-7-14-available/10429/1) for details on the rename
+
+## 0.21.4 (2017-02-13)
+- Add properties to override the platform details of a `chef_ingredient` product to install
+
+## 0.21.3 (2017-02-02)
+- Add timeout to package resource created by configure_from_source_package
+
+## 0.21.2 (2016-10-26)
+- Fix issue when failed package installs using OmnitruckHandler would not raise a converge error on subsequent runs
+
+## 0.21.1 (2016-10-25)
+- Update SUSE platform to use DefaultHandler
+
+## 0.21.0 (2016-09-26)
+- Update mixlib-install to version 2.0 (PackageRouter support)
+
+## 0.20.0 (2016-09-08)
+- Remove extraneous converge_by that caused downloads to show as converged on every run
+- Use compat_resource cookbook to add support for Chef 12.1-12.4
+- Use apt_update resource vs. the apt cookbook in the test cookbook
+- Update Travis CI testing to use our standard Rakefile and cookstyle for ruby linting.
+- Fix chefspec / foodcritic / test kitchen failures
+- Swap the Policyfile for a Berksfile
+- Remove unnecessary action and default_action properties from the custom resources
+
+# v0.19.0
+
+- Remove delivery-cli examples and tests (we now shipit with ChefDK)
+- Set version constraint to ~> 1.1 for installing mixlib-install from Rubygems
+
+# v0.18.5
+
+- [#106](https://github.com/chef-cookbooks/chef-ingredient/pull/106) Limit `remote_file` backups to 1
+- [#110](https://github.com/chef-cookbooks/chef-ingredient/pull/110) Get rid of default: nil warnings
+
 # v0.18.4
 
 - Add `platform_version_compatibility_mode` property to `chef_ingredient` which makes chef-ingredient select packages built for earlier version of a platform during install when a package does not exist for the current platform version.

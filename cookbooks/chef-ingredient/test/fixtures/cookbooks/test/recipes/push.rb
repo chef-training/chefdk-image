@@ -1,4 +1,3 @@
-chef_ingredient 'push-client' do
-  version node['test']['push-client']['version']
+chef_ingredient 'push-jobs-client' do
   action :install
 end

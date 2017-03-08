@@ -1,6 +1,6 @@
 #
 # Author:: Joshua Timberman <joshua@chef.io
-# Copyright (c) 2014-2015, Chef Software, Inc. <legal@chef.io>
+# Copyright (c) 2014-2016, Chef Software, Inc. <legal@chef.io>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ class Chef
       def initialize(name, run_context = nil)
         super(name, run_context)
         case node['platform_family']
-        when 'debian', 'rhel', 'windows'
+        when 'debian', 'rhel', 'suse', 'windows'
           extend ::ChefIngredient::DefaultHandler
         else
           # OmnitruckHandler is used for Solaris, AIX, FreeBSD, etc.
