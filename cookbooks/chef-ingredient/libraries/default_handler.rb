@@ -48,14 +48,17 @@ module ChefIngredient
     end
 
     def configure_from_source_package(action_name, local_path = nil)
-      package new_resource.product_name do
+      # Foodcritic doesn't like timeout attribute in package resource
+      package new_resource.product_name do # ~FC009
         action action_name
         package_name ingredient_package_name
         options new_resource.options
         source local_path || new_resource.package_source
+        timeout new_resource.timeout
         provider value_for_platform_family(
           'debian'  => Chef::Provider::Package::Dpkg,
           'rhel'    => Chef::Provider::Package::Rpm,
+          'suse'    => Chef::Provider::Package::Rpm,
           'windows' => Chef::Provider::Package::Windows
         )
         if new_resource.product_name == 'chef'
@@ -93,19 +96,18 @@ module ChefIngredient
 
       if artifact_info == []
         raise <<-EOH
-No package found for '#{new_resource.product_name}' with version '#{new_resource.version}' for current platform in '#{new_resource.channel}' channel.
+No package found for '#{new_resource.product_name}' with version '#{new_resource.version}' for platform '#{installer.options.platform}-#{installer.options.platform_version}-#{installer.options.architecture}' in '#{new_resource.channel}' channel.
 Check that the package exists.
         EOH
       end
       remote_artifact_path = artifact_info.url
       local_artifact_path = File.join(cache_path, ::File.basename(remote_artifact_path))
 
-      converge_by "Download #{new_resource.product_name} package from #{remote_artifact_path}\n" do
-        remote_file local_artifact_path do
-          source remote_artifact_path
-          mode '0644'
-          checksum installer.artifact_info.sha256
-        end
+      remote_file local_artifact_path do
+        source remote_artifact_path
+        mode '0644'
+        checksum installer.artifact_info.sha256
+        backup 1
       end
 
       configure_from_source_package(action_name, local_artifact_path)

@@ -1,6 +1,5 @@
 # Chef Server Core
 chef_ingredient 'chef-server' do
-  version node['test']['chef-server-core']['version']
   config <<-EOS
 api_fqdn "#{node['fqdn']}"
 ip_version "ipv6"
@@ -26,6 +25,7 @@ disable_sign_up true
 support_email_address "#{node['chef_admin']}"
 EOS
   action :install
+  accept_license true
 end
 
 file '/tmp/opscode-manage.firstrun' do

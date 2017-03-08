@@ -1,6 +1,6 @@
 #
 # Author:: Joshua Timberman <joshua@chef.io
-# Copyright (c) 2015, Chef Software, Inc. <legal@chef.io>
+# Copyright (c) 2015-2016, Chef Software, Inc. <legal@chef.io>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 class Chef
   class Resource
     class ChefIngredient < Chef::Resource::LWRPBase
@@ -23,21 +24,21 @@ class Chef
       default_action :install
 
       attribute :product_name, kind_of: String, name_attribute: true
-      attribute :config, kind_of: String, default: nil
+      attribute :config, kind_of: String
 
       # Attributes for determining what version to install from which channel
       attribute :version, kind_of: [String, Symbol], default: :latest
-      attribute :channel, kind_of: Symbol, default: :stable, equal_to: [:current, :stable, :unstable]
+      attribute :channel, kind_of: Symbol, default: :stable, equal_to: [:stable, :current, :unstable]
 
       # Attribute to install package from local file
-      attribute :package_source, kind_of: String, default: nil
+      attribute :package_source, kind_of: String
 
       # Sets the *-ctl command to use when doing reconfigure
       attribute :ctl_command, kind_of: String
 
       # Attributes for package resources used on rhel and debian platforms
       attribute :options, kind_of: String
-      attribute :timeout, kind_of: [Integer, String, NilClass], default: nil
+      attribute :timeout, kind_of: [Integer, String, NilClass]
 
       # Attribute to accept the license when applicable
       attribute :accept_license, kind_of: [TrueClass, FalseClass], default: false
@@ -45,6 +46,11 @@ class Chef
       # Attribute to enable selecting packages built for earlier versions in
       # platforms that are not yet officially added to Chef support matrix
       attribute :platform_version_compatibility_mode, kind_of: [TrueClass, FalseClass], default: false
+
+      # Atttibutes for configuring a specific platform package
+      attribute :platform, kind_of: String
+      attribute :platform_version, kind_of: String
+      attribute :architecture, kind_of: String
     end
   end
 end

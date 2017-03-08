@@ -1,6 +1,6 @@
 #
 # Author:: Joshua Timberman <joshua@chef.io>
-# Copyright (c) 2014-2015, Chef Software, Inc. <legal@chef.io>
+# Copyright (c) 2014-2016, Chef Software, Inc. <legal@chef.io>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,7 +68,7 @@ module ChefIngredientCookbook
     #
     def ensure_mixlib_versioning_gem_installed!
       node.run_state[:mixlib_versioning_gem_installed] ||= begin # ~FC001
-        install_gem_from_rubygems('mixlib-versioning', '1.1.0')
+        install_gem_from_rubygems('mixlib-versioning', '~> 1.1')
 
         require 'mixlib/versioning'
         true
@@ -87,7 +87,7 @@ module ChefIngredientCookbook
             'mixlib-install'
           )
         else
-          install_gem_from_rubygems('mixlib-install', '~> 1.0')
+          install_gem_from_rubygems('mixlib-install', ['~> 2.1', '>= 2.1.12'])
         end
 
         require 'mixlib/install'
@@ -285,12 +285,22 @@ module ChefIngredientCookbook
           product_name: new_resource.product_name,
           channel: new_resource.channel,
           product_version: new_resource.version,
-          platform_version_compatibility_mode: new_resource.platform_version_compatibility_mode
+          platform_version_compatibility_mode: new_resource.platform_version_compatibility_mode,
         }.tap do |opt|
           opt[:shell_type] = :ps1 if windows?
         end
 
-        Mixlib::Install.new(options).detect_platform
+        platform_details = Mixlib::Install.detect_platform
+
+        platform_details.tap do |opt|
+          opt[:platform] = new_resource.platform if new_resource.platform
+          opt[:platform_version] = new_resource.platform_version if new_resource.platform_version
+          opt[:architecture] = new_resource.architecture if new_resource.architecture
+        end
+
+        options.merge!(platform_details)
+
+        Mixlib::Install.new(options)
       end
     end
 
@@ -333,7 +343,7 @@ module ChefIngredientCookbook
         # We also have a specific case we need to handle for push-client and push-server
         deprecated_product_names = {
           'push-client' => 'push-jobs-client',
-          'push-server' => 'push-jobs-server'
+          'push-server' => 'push-jobs-server',
         }
 
         if deprecated_product_names.keys.include?(new_resource.product_name)

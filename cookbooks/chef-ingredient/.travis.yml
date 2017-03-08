@@ -1,43 +1,40 @@
-language: ruby
-cache: bundler
+sudo: required
+dist: trusty
 
-# Use Travis's cointainer based infrastructure
-sudo: false
 addons:
   apt:
     sources:
-      - chef-current-precise
+      - chef-stable-trusty
     packages:
       - chefdk
 
-# We are still doing bundle install since we want to use the
-# master of mixlib-install until it gets a full release.
-install:
-  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-  - bundle install
+# Don't `bundle install` which takes about 1.5 mins
+install: echo "skip bundle install"
 
 branches:
   only:
     - master
 
-# make sure we have the latest version of bunder required by ohai which
-# fauxhai depends on which chefspec depends on
-before_install:
-  - gem update --system
-  - gem install bundler
-  - bundle --version
-  - gem --version
+services: docker
 
-# Ensure we make ChefDK's Ruby the default
+env:
+  matrix:
+  - INSTANCE=chefdk-centos-6
+  - INSTANCE=chefdk-centos-7
+  - INSTANCE=chefdk-ubuntu-1404
+  - INSTANCE=chefdk-ubuntu-1604
+
 before_script:
+  - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-  - /opt/chefdk/embedded/bin/chef gem install chef-sugar
-  - /opt/chefdk/embedded/bin/chef gem install mixlib-versioning
-  - /opt/chefdk/embedded/bin/chef gem install mixlib-install --pre
-script:
   - /opt/chefdk/embedded/bin/chef --version
-  - /opt/chefdk/embedded/bin/rubocop --version
-  - /opt/chefdk/embedded/bin/rubocop
+  - /opt/chefdk/embedded/bin/cookstyle --version
   - /opt/chefdk/embedded/bin/foodcritic --version
-  - /opt/chefdk/embedded/bin/foodcritic . --exclude spec
-  - bundle exec rake
+
+script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
+
+matrix:
+  include:
+    - script:
+      - /opt/chefdk/bin/chef exec delivery local all
+      env: UNIT_AND_LINT=1
