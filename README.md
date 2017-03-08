@@ -90,6 +90,15 @@ $ packer validate tdd_cookbook_development-centos.json
 $ packer build tdd_cookbook_development-centos.json
 ```
 
+* Elegant Tests Image
+
+```
+# Validate and then build the Elegant Tests CentOS 6.7 Workstation
+$ packer validate elegant_tests-centos.json
+$ packer build elegant_tests-centos.json
+```
+
+
 ## Known Issues
 
 ### Windows Nodes and Workstations
