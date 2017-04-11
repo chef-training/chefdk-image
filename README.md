@@ -98,6 +98,17 @@ $ packer validate elegant_tests-centos.json
 $ packer build elegant_tests-centos.json
 ```
 
+## Sharing Images
+
+Once an AMI is created there are a number of individuals that will likely want
+access to those AMIs. To grant access to the AMI that was created you run:
+
+```
+$ rake ami:grant AMI_ID=ami-????????
+```
+
+This will iterate through the entire list of [AMI subscribers](subscribers.yml)
+
 
 ## Known Issues
 
@@ -108,4 +119,4 @@ The current version of Packer (0.8.6) does not successfully allow you to use Che
 * Launch a clean Windows 2012R2 Instance
 * Login to that Instance
 * Run the WinRM script (`scripts/winrm.ps1`)
-* Run the specific script for the target (e.g. `scripts/compliance-windows.ps1`)
+* Run the specific script for the course (e.g. For Compliance, run `scripts/compliance-windows.ps1`)
