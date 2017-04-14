@@ -25,7 +25,7 @@ user 'chef' do
   comment 'ChefDK User'
   home '/home/chef'
   shell '/bin/bash'
-  supports :manage_home => true
+  manage_home true
   password '$1$seaspong$/UREL79gaEZJRXoYPaKnE.'
   action :create
 end
