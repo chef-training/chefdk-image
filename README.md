@@ -82,7 +82,7 @@ $ packer validate compliance-windows.json
 $ packer build compliance-windows.json
 ```
 
-* TDD Cookbook Development Image
+* TDD Cookbook Development - CentOS Image
 
 ```
 # Validate and then build the TDD Cookbook Development CentOS 6.7 Workstation
@@ -90,7 +90,23 @@ $ packer validate tdd_cookbook_development-centos.json
 $ packer build tdd_cookbook_development-centos.json
 ```
 
-* Elegant Tests Image
+* Extending Cookbooks - CentOS Image
+
+```
+# Validate and then build the Extending Cookbooks CentOS 6.7 Workstation
+$ packer validate extending_cookbooks-centos.json
+$ packer build extending_cookbooks-centos.json
+```
+
+* Intermediate - CentOS Image
+
+```
+# Validate and then build the Intermediate CentOS 6.7 Workstation
+$ packer validate intermediate-centos.json
+$ packer build intermediate-centos.json
+```
+
+* Elegant Tests - CentOS Image
 
 ```
 # Validate and then build the Elegant Tests CentOS 6.7 Workstation
