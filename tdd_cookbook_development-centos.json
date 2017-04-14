@@ -16,7 +16,7 @@
     "instance_type": "m3.medium",
     "source_ami": "ami-c10044a4",
     "ssh_username": "root",
-    "ami_name": "TDD Cookbook Development - CentOS 6.7 - 1.1.0"
+    "ami_name": "TDD Cookbook Development - CentOS 6.7 - 2.0.0"
   }],
 
   "provisioners": [{
