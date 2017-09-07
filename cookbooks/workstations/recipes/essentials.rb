@@ -7,7 +7,7 @@
 chef_ingredient 'chefdk' do
   action :install
   channel :stable
-  version '0.17.17'
+  version '2.0.28'
 end
 
 include_recipe "#{cookbook_name}::centos-chef_user"
