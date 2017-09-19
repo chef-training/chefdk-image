@@ -37,5 +37,5 @@ suites:
       - recipe[COOKBOOK::default]
     verifier:
       inspec_tests:
-        - test/recipes
+        - test/smoke/default
     attributes:
