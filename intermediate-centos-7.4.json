@@ -1,0 +1,27 @@
+{
+  "variables": {
+    "name": "Intermediate - CentOS 7.4 - 0.0.2",
+    "chefdk_version": "2.4.17"
+  },
+  "builders": [{
+    "ssh_username": "chef",
+    "ssh_password": "Cod3Can!",
+    "type": "amazon-ebs",
+    "ssh_pty": true,
+    "region": "us-east-1",
+    "instance_type": "m3.medium",
+    "source_ami": "ami-05e6876ba54c79c28",
+    "ami_name": "{{user `name`}}"
+  }],
+
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "echo 'The base image updated cloud-init. Waiting for cloud-init to finish (~ 5 minutes).'",
+      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting 15 seconds for cloud-init...'; sleep 15; done",
+      "curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -v {{user `chefdk_version`}} -P chefdk",
+      "sudo yum install -y git tree",
+      "git clone https://github.com/chef-training/chef-intermediate-repo.git /home/chef/apache"
+    ]
+  }]
+}

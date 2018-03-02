@@ -114,6 +114,21 @@ $ packer validate elegant_tests-centos.json
 $ packer build elegant_tests-centos.json
 ```
 
+## CentOS 7.4 Series
+
+For the next series of images the project has opted to prepare them mostly through
+cloud-init scripts. A base image prepares the cloud-init file. Then each workshop/training
+image will pause to let the image complete and put the final touches.
+
+* `packer build base-centos-7.4.json`
+* `packer build essentials-centos-7.4.json`
+* `packer build intermediate-centos-7.4.json`
+
+Create an instance and you can ensure that it is installed correctly with the InSpec controls:
+
+* `inspec exec tests/essentials.rb --sudo -t ssh://chef:Cod3Can\!@address`
+* `inspec exec tests/intermediate.rb --sudo -t ssh://chef:Cod3Can\!@address`
+
 ## Sharing Images
 
 Once an AMI is created there are a number of individuals that will likely want

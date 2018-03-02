@@ -1,21 +1,16 @@
 {
   "variables": {
-    "aws_access_key": "",
-    "aws_secret_key": "",
     "aws_keypair_name": "training-ec2-keypair",
     "aws_keypair_file": "{{env `TRAINING_AWS_KEYPAIR`}}",
-    "name": "Base - CentOS 7.4 - 0.0.9"
+    "name": "Base - CentOS 7.4 - 0.1.0"
   },
   "builders": [{
-    "access_key": "{{user `aws_access_key`}}",
-    "secret_key": "{{user `aws_secret_key`}}",
     "ssh_keypair_name": "{{user `aws_keypair_name`}}",
     "ssh_private_key_file": "{{user `aws_keypair_file`}}",
-
     "type": "amazon-ebs",
     "ssh_pty": true,
     "region": "us-east-1",
-    "instance_type": "m3.medium",
+    "instance_type": "t2.small",
     "source_ami": "ami-4bf3d731",
     "ssh_username": "centos",
     "ami_name": "{{user `name`}}"
@@ -23,6 +18,6 @@
 
   "provisioners": [{
     "type": "shell",
-    "script": "./cloud-init.sh"
+    "script": "./cloud-init-centos-7.4.sh"
   }]
 }
