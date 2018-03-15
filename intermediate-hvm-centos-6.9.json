@@ -2,7 +2,7 @@
     "variables": {
       "aws_keypair_name": "{{env `TRAINING_AWS_KEYPAIR_NAME`}}",
       "aws_keypair_file": "{{env `TRAINING_AWS_KEYPAIR`}}",
-      "name": "EDH TEST2 Intermediate - CentOS 6.9 - 3.0.2",
+      "name": "EDH TEST3 Intermediate - CentOS 6.9 - 3.0.2",
       "chefdk_version": "2.4.17"
     },
     "builders": [{
@@ -12,7 +12,7 @@
       "ssh_password": "Cod3Can!",
       "region": "us-east-1",
       "instance_type": "m3.medium",
-      "source_ami": "ami-0fe9fe9038cf29042", 
+      "source_ami": "ami-0bdb408de2420d811", 
       "ami_name": "{{user `name`}}",
       "tags" : {
         "node_type" : "chef-intermediate-workstation",
