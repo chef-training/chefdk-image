@@ -17,5 +17,5 @@ end
 
 append_if_no_line "Update max startups" do
   path "/etc/ssh/sshd_config"
-  line "MaxStartups 250"
+  line "MaxStartups 250:100:250"
 end
