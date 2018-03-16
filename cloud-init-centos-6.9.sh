@@ -62,8 +62,10 @@ runcmd:
   - sudo service iptables stop
   - sudo chkconfig iptables off
   - sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
-  - echo 'MaxSessions 250' | sudo tee --append /etc/ssh/sshd_config
-  - echo 'MaxStartups 250:100:250' | sudo tee --append /etc/ssh/sshd_config
+  # - sudo sed -i 's/#MaxSessions 10/MaxSessions 250/' /etc/ssh/sshd_config
+  # - sudo sed -i 's/#MaxStartups 10:30:100/MaxStartups 250:100:250/' /etc/ssh/sshd_config
+  # - echo 'MaxSessions 250' | sudo tee --append /etc/ssh/sshd_config
+  # - echo 'MaxStartups 250:100:250' | sudo tee --append /etc/ssh/sshd_config
   - sudo service sshd restart
 EOF
 "

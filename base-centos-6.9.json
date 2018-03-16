@@ -2,7 +2,7 @@
   "variables": {
     "aws_keypair_name": "{{env `TRAINING_AWS_KEYPAIR_NAME`}}",
     "aws_keypair_file": "{{env `TRAINING_AWS_KEYPAIR`}}",
-    "name": "Base - CentOS 6.9 - 0.2.2"
+    "name": "Base - CentOS 6.9 - 0.2.3"
   },
   "builders": [{
     "ssh_keypair_name": "{{user `aws_keypair_name`}}",
