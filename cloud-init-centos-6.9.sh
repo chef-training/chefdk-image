@@ -58,12 +58,12 @@ runcmd:
   - sudo yum -y remove docker
   - sudo yum install -y docker-io
   - sudo service docker start
-  - sudo mkdir -p /etc/chef/ohai/hints && sudo bash -c "echo '{}' > /etc/chef/ohai/hints/ec2.json"
+  - sudo mkdir -p /etc/chef/ohai/hints && echo '{}' | sudo tee  /etc/chef/ohai/hints/ec2.json
   - sudo service iptables stop
   - sudo chkconfig iptables off
   - sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
-  - sudo bash -c 'echo "MaxSessions 250" >> /etc/ssh/sshd_config'
-  - sudo bash -c 'echo "MaxStartups 250:100:250" >> /etc/ssh/sshd_config'
+  - echo 'MaxSessions 250' | sudo tee --append /etc/ssh/sshd_config
+  - echo 'MaxStartups 250:100:250' | sudo tee --append /etc/ssh/sshd_config
   - sudo service sshd restart
 EOF
 "
