@@ -2,7 +2,11 @@
   "variables": {
     "aws_keypair_name": "{{env `TRAINING_AWS_KEYPAIR_NAME`}}",
     "aws_keypair_file": "{{env `TRAINING_AWS_KEYPAIR`}}",
+<<<<<<< HEAD:base-centos-6.9.json
     "name": "Base - CentOS 6.9 - 0.2.3"
+=======
+    "name": "Experimental - CentOS 6.9 - 0.2.2"
+>>>>>>> Moves the files and places a blank terraform:base-centos-6.9/base-centos-6.9.json
   },
   "builders": [{
     "ssh_keypair_name": "{{user `aws_keypair_name`}}",
