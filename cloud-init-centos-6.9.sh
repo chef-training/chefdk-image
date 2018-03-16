@@ -58,7 +58,6 @@ runcmd:
   - sudo yum -y remove docker
   - sudo yum install -y docker-io
   - sudo service docker start
-    This command below is not working with echo '{}' > /etc/chef/ohai/hints/ec2.json
   - sudo mkdir -p /etc/chef/ohai/hints && sudo bash -c "echo '{}' > /etc/chef/ohai/hints/ec2.json"
   - sudo service iptables stop
   - sudo chkconfig iptables off
