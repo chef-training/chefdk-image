@@ -1,0 +1,23 @@
+{
+  "variables": {
+    "aws_keypair_name": "{{env `TRAINING_AWS_KEYPAIR_NAME`}}",
+    "aws_keypair_file": "{{env `TRAINING_AWS_KEYPAIR`}}",
+    "name": "Base - CentOS 7.4 - 0.2.1"
+  },
+  "builders": [{
+    "ssh_keypair_name": "{{user `aws_keypair_name`}}",
+    "ssh_private_key_file": "{{user `aws_keypair_file`}}",
+    "type": "amazon-ebs",
+    "ssh_pty": true,
+    "region": "us-east-1",
+    "instance_type": "t2.small",
+    "source_ami": "ami-4bf3d731",
+    "ssh_username": "centos",
+    "ami_name": "{{user `name`}}"
+  }],
+
+  "provisioners": [{
+    "type": "shell",
+    "script": "./init.sh"
+  }]
+}
