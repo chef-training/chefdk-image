@@ -54,16 +54,18 @@ packages:
 runcmd:
   - echo 'hello friend' > /home/centos/fsociety.dat
   - curl http://ftp.osuosl.org/pub/fedora-epel/6/i386/epel-release-6-8.noarch.rpm -o epel-release-6-8.noarch.rpm
-  - rpm -ivh epel-release-6-8.noarch.rpm
-  - yum -y remove docker
-  - yum install -y docker-io
-  - service docker start
-  - mkdir -p /etc/chef/ohai/hints && echo '{}' > /etc/chef/ohai/hints/ec2.json
-  - service iptables stop
-  - chkconfig iptables off
-  - sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
-  - echo 'MaxSessions 250' >> /etc/ssh/sshd_config
-  - echo 'MaxStartups 250:100:250' >> /etc/ssh/sshd_config
-  - service sshd restart
+  - sudo rpm -ivh epel-release-6-8.noarch.rpm
+  - sudo yum -y remove docker
+  - sudo yum install -y docker-io
+  - sudo service docker start
+  - sudo mkdir -p /etc/chef/ohai/hints && echo '{}' | sudo tee  /etc/chef/ohai/hints/ec2.json
+  - sudo service iptables stop
+  - sudo chkconfig iptables off
+  - sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
+  - sudo sed -i 's/#MaxSessions 10/MaxSessions 250/' /etc/ssh/sshd_config
+  - sudo sed -i 's/#MaxStartups 10:30:100/MaxStartups 250:100:250/' /etc/ssh/sshd_config
+  # - echo 'MaxSessions 250' | sudo tee --append /etc/ssh/sshd_config
+  # - echo 'MaxStartups 250:100:250' | sudo tee --append /etc/ssh/sshd_config
+  - sudo service sshd restart
 EOF
 "
