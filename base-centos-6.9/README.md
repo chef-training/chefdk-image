@@ -34,18 +34,31 @@ us-east-1: ami-0f9d003768fb94ef7
 
 The next step requires [Terraform](https://www.terraform.io/downloads.html) installed.
 
-```
+```shell
 $ terraform init
 $ terraform apply
+var.base_ami
+  Enter a value: ami-0f9d003768fb94ef7
     ...
     ...
   > yes
-i-saw-the-sign-and-it-opened-up-my-mind IPADDRESS
+  instance.ip = 54.157.10.89
+  instance.password = Cod3Can!
+  instance.user = chef
 ```
 
 ## Connect
 
-Use your SSH client to connect to the IPADDRESS:
+Use your SSH client to connect to the 54.157.10.89:
 
-    username: chef
-    password: Cod3Can!
+```
+$ ssh chef@54.157.10.89
+```
+
+## Test
+
+The next step requires InSpec.
+
+```shell
+$ inspec exec test.rb --sudo -t ssh://chef:Cod3Can!@54.157.10.89
+```

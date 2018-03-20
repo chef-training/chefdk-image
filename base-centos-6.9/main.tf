@@ -2,7 +2,7 @@
 # variable for the ami I want to create
 # let the user enter it
 
-# ami-0a381e9274ee9f1e5
+# ami-?????????
 
 variable "base_ami" { }
 # variable "aws_access_key" { }
@@ -23,6 +23,14 @@ resource "aws_instance" "ace_of_base" {
     associate_public_ip_address = true
 }
 
-output "i-saw-the-sign-and-it-opened-up-my-mind" {
+output "base.ip" {
   value = "${aws_instance.ace_of_base.public_ip}"
+}
+
+output "instance.user" {
+  value = "chef"
+}
+
+output "instance.password" {
+  value = "Cod3Can!"
 }

@@ -1,0 +1,56 @@
+
+def packer_results
+  '.packer.results'
+end
+
+def packer_created_ami_id
+  matches = File.read(packer_results).match(/AMIs were created:\\n(?<region>[^:]+):\s(?<ami_id>ami-[a-f0-9]+)\\n/)
+  ami_id = matches[:ami_id]
+end
+
+def terraform_results
+  '.terraform.results'
+end
+
+def terraform_variables
+  'terraform.tfvars'
+end
+
+def terraform_data
+  require 'json'
+  params = JSON.parse(File.read(terraform_results))
+  [ params['instance.user']['value'], params['instance.password']['value'], params['instance.ip']['value'] ]
+end
+
+
+task :build do
+  # Check ENV
+  system "packer build packer.json -machine-readable > #{packer_results}"
+end
+
+task :write_terraform_variables do
+  File.write(terraform_variables,"base_ami = \"#{packer_created_ami_id}\"")
+end
+
+task :run => [ :write_terraform_variables ] do
+  # Check ENV
+  system "terraform apply -auto-approve"
+  system "terraform output --json > #{terraform_results}"
+end
+
+task :test do
+  # Check ENV
+  puts "Testing will fail until the instance has finished its cloud init script (~ 5 minutes)"
+  sleep 360
+  user, password, address = terraform_data
+  system "inspec exec test.rb --sudo -t ssh://#{user}:#{password}@#{address}"
+end
+
+task :clean do
+  system "terraform destroy -force"
+  system "rm #{terraform_results}"
+  system "rm #{terraform_variables}"
+  system "rm #{packer_results}"
+end
+
+task :all => [ :build, :run, :test ]
