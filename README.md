@@ -20,12 +20,26 @@ aws_access_key_id = ACCESS_KEY_ID
 aws_secret_access_key = SECRET_ACCESS_KEY
 ```
 
-\3. Add the TRAINING_AWS_KEYPAIR environment variable pointing to the key filepath
+\3. Setting up key pair name and local key (.pem file)
+Add the TRAINING_AWS_KEYPAIR_NAME environment variable labeled as your AWS.pem name as specified when lauching instances to connect to via SSH.
+
+> This is an example of setting up that environment variable
+
+```
+$ export TRAINING_AWS_KEYPAIR_NAME="Eric Heiser"
+Windows:
+$env:TRAINING_AWS_KEYPAIR_NAME="Eric Heiser"
+
+```
+
+Add the TRAINING_AWS_KEYPAIR environment variable pointing to the key filepath
 
 > This is an example of setting up that environment variable
 
 ```
 $ export TRAINING_AWS_KEYPAIR=/Users/franklinwebber/.ssh/training-ec2-keypair.pem
+Windows:
+$env:TRAINING_AWS_KEYPAIR=/Users/franklinwebber/.ssh/training-ec2-keypair.pem
 ```
 
 \4. Install [Packer](https://www.packer.io/downloads.html). At least 0.8.1.
