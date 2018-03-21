@@ -3,8 +3,6 @@
 # https://inspec.io/docs/reference/resources/user/
 describe user('chef') do
   it { should exist }
-  its('groups') { should include 'wheel' }
-  its('groups') { should include 'root' }
 end
 
 # https://inspec.io/docs/reference/resources/package/
