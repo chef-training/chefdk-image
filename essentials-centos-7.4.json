@@ -3,7 +3,7 @@
     "aws_keypair_name": "training-ec2-keypair",
     "aws_keypair_file": "{{env `TRAINING_AWS_KEYPAIR`}}",
     "name": "Essentials - CentOS 7.4 - 0.0.3",
-    "chefdk_version": "2.4.17"
+    "chefdk_version": "3.0.36"
   },
   "builders": [{
     "ssh_username": "chef",
