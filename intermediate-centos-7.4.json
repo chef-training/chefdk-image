@@ -1,7 +1,7 @@
 {
   "variables": {
     "name": "Intermediate - CentOS 7.4 - 0.0.2",
-    "chefdk_version": "2.4.17"
+    "chefdk_version": "3.0.36"
   },
   "builders": [{
     "ssh_username": "chef",
