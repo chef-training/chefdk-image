@@ -21,7 +21,7 @@
       "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting 15 seconds for cloud-init...'; sleep 15; done",
       "curl https://omnitruck.chef.io/install.sh | sudo bash -s -- {{user `workstation_version`}} -c stable -P chef-workstation",
       "sudo yum install -y git tree",
-      "git clone https://github.com/chef-training/chef-intermediate-repo.git /home/chef/apache"
+      "git clone https://github.com/chef-training/chef-intermediate-repo.git /home/chef/chef-repo"
     ]
   }]
 }
