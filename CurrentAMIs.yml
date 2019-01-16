@@ -1,0 +1,36 @@
+---
+Essentials_Linux:
+  - ami_name
+    Essentials - CentOS 6.7 - 7.0.0
+  - ami_id
+    ami-d5d7ffae
+  - instance
+    micro
+Essentials_Windows:
+  - ami_name
+    Essentials - Windows 2012 Workstation - 1.2.1
+  - ami_id
+    ami-0f45c697f1ef56eb1
+  - instance
+    t2.large
+Chef-Foundations_AMI_1:
+  - ami_name
+    Essentials - Windows 2012 Workstation - 1.2.1
+  - ami_id
+    ami-0f45c697f1ef56eb1
+  - instance
+    t2.large
+Chef-Foundations_AMI_2:
+  - ami_name
+    Essentials - CentOS 6.7 - 7.0.0
+  - ami_id
+    ami-d5d7ffae
+  - instance
+    t1.micro
+Chef-Intermediate:
+  - ami_name
+    Intermediate Training - CentOS 7.4 - 0.0.14
+  - ami_id
+    ami-0f1c8f97fe6a372eb
+  - instance
+    t1.micro
