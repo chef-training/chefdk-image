@@ -29,8 +29,8 @@ Chef-Foundations_AMI_2:
     t1.micro
 Chef-Intermediate:
   - ami_name
-    Intermediate Training - CentOS 7.4 - 0.0.11
+    Intermediate Training - CentOS 7.4 - 0.0.13
   - ami_id
-    ami-03d69bdc7e61da911
+    ami-021d25593edb0947f
   - instance
     t1.micro
