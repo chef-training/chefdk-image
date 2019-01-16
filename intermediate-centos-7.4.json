@@ -1,7 +1,7 @@
 {
   "variables": {
-    "name": "Intermediate - CentOS 7.4 - 0.0.2",
-    "chefdk_version": "2.4.17"
+    "name": "Intermediate Training - CentOS 7.4 - 0.0.14",
+    "workstation_version": "0.2.43"
   },
   "builders": [{
     "ssh_username": "chef",
@@ -19,9 +19,14 @@
     "inline": [
       "echo 'The base image updated cloud-init. Waiting for cloud-init to finish (~ 5 minutes).'",
       "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting 15 seconds for cloud-init...'; sleep 15; done",
-      "curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -v {{user `chefdk_version`}} -P chefdk",
-      "sudo yum install -y git tree",
-      "git clone https://github.com/chef-training/chef-intermediate-repo.git /home/chef/apache"
+      "curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -v {{user `workstation_version`}} -c stable -P chef-workstation",
+      "sudo yum install -y git tree wget",
+      "mkdir /home/chef/.chef",
+      "git clone https://github.com/chef-training/chef-generator.git /home/chef/.chef/generator",
+      "echo 'chefdk.generator_cookbook = \"/home/chef/.chef/generator\"' > /home/chef/.chef/config.rb",
+      "git clone -b extending-cookbooks https://github.com/chef-training/chef-intermediate-repo.git /home/chef/day2-repo",
+      "/usr/bin/chef gem install kitchen-docker"
+
     ]
   }]
 }
