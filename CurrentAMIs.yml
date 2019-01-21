@@ -2,6 +2,8 @@
 Updated:
   - '21 January 2019'
 Essentials_Linux:
+  - packer_script:
+    ''
   - ami_name
     Essentials - CentOS 6.7 - 7.0.0
   - ami_id
@@ -9,6 +11,8 @@ Essentials_Linux:
   - instance
     micro
 Essentials_Windows:
+  - packer_script:
+    ''
   - ami_name
     Essentials - Windows 2012 Workstation - 1.2.1
   - ami_id
@@ -16,6 +20,8 @@ Essentials_Windows:
   - instance
     t2.large
 Chef-Foundations_AMI_1:
+  - packer_script:
+    ''
   - ami_name
     Essentials - Windows 2012 Workstation - 1.2.1
   - ami_id
@@ -23,6 +29,8 @@ Chef-Foundations_AMI_1:
   - instance
     t2.large
 Chef-Foundations_AMI_2:
+  - packer_script:
+    ''
   - ami_name
     Essentials - CentOS 6.7 - 7.0.0
   - ami_id
@@ -30,6 +38,8 @@ Chef-Foundations_AMI_2:
   - instance
     t1.micro
 Chef-Intermediate:
+  - packer_script:
+    'intermediate-centos-7.4.json'
   - ami_name
     Intermediate Training - CentOS 7.4 - 0.0.14
   - ami_id
