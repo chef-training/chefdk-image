@@ -21,22 +21,26 @@ Essentials_Windows:
     t2.large
 Chef-Foundations_AMI_1:
   - packer_script
-    ''
+    foundations-windows-workstation.json
   - ami_name
-    Essentials - Windows 2012 Workstation - 1.2.1
+    Foundations - Windows 2012 Workstation - 0.0.1
   - ami_id
-    ami-0f45c697f1ef56eb1
+    ami-03e724e3e268e7a36
   - instance
     t2.large
 Chef-Foundations_AMI_2:
   - packer_script
-    ''
+    foundations-centos-7.4.json
   - ami_name
-    Essentials - CentOS 6.7 - 7.0.0
+    Foundations Training - CentOS 7.4 - 0.0.2
   - ami_id
-    ami-d5d7ffae
+    ami-00d3e13fa42a594fa
+  # - ami_name
+  #   Essentials - CentOS 6.7 - 7.0.0
+  # - ami_id
+  #   ami-d5d7ffae
   - instance
-    t1.micro
+    t2.micro
 Chef-Intermediate:
   - packer_script
     'intermediate-centos-7.4.json'

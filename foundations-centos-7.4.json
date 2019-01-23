@@ -1,0 +1,38 @@
+{
+  "variables": {
+    "name": "Foundations Training - CentOS 7.4 - 0.0.2",
+    "workstation_version": "0.2.43"
+  },
+  "builders": [{
+    "ssh_username": "chef",
+    "ssh_password": "Cod3Can!",
+    "type": "amazon-ebs",
+    "ssh_pty": true,
+    "region": "us-east-1",
+    "instance_type": "m3.medium",
+    "source_ami": "ami-05e6876ba54c79c28",
+    "ami_name": "{{user `name`}}"
+  }],
+
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "echo 'The base image updated cloud-init. Waiting for cloud-init to finish (~ 5 minutes).'",
+      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting 15 seconds for cloud-init...'; sleep 15; done",
+      "curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -v {{user `workstation_version`}} -c stable -P chef-workstation",
+      "sudo yum install -y git tree wget",
+      "mkdir /home/chef/.chef",
+      "git clone https://github.com/chef-training/chef-generator.git /home/chef/.chef/generator",
+      "echo 'chefdk.generator_cookbook = \"/home/chef/.chef/generator\"' > /home/chef/.chef/config.rb",
+      "/usr/bin/chef gem install kitchen-docker"
+
+    ]
+  },
+  {
+    "type": "chef-solo",
+    "install_command": "curl -L https://www.chef.io/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s",
+    "cookbook_paths": ["cookbooks"],
+    "run_list": ["workstations::foundations"]
+
+  }]
+}
