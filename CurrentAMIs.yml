@@ -23,9 +23,9 @@ Chef-Foundations_AMI_1:
   - packer_script
     foundations-windows-workstation.json
   - ami_name
-    Foundations - Windows 2012 Workstation - 0.0.1
+    Foundations Training - Windows 2012 Workstation - 0.0.8
   - ami_id
-    ami-03e724e3e268e7a36
+    ami-05887edfd4e816057
   - instance
     t2.large
 Chef-Foundations_AMI_2:
