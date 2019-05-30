@@ -1,0 +1,26 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "aws_keypair": "{{env `TRAINING_AWS_KEYPAIR`}}"
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "communicator": "winrm",
+    "region": "us-east-1",
+    "user_data_file":"./scripts/winrm.ps1",
+    "winrm_port": 5985,
+    "source_ami": "ami-0aa858ff0b1c8620f",
+    "instance_type": "m3.large",
+    "winrm_username": "Administrator",
+    "ami_name": "Foundations Training - Windows 2012 Workstation - 0.0.5"
+  }],
+  "provisioners": [
+    {
+      "type" : "powershell",
+      "scripts" : [
+        "./scripts/foundations-windows-workstation.ps1"
+      ]
+    }
+  ]
+}

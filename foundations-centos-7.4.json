@@ -1,6 +1,6 @@
 {
   "variables": {
-    "name": "Intermediate Training - CentOS 7.4 - 0.0.15",
+    "name": "Foundations Training - CentOS 7.4 - 0.0.2",
     "workstation_version": "0.2.43"
   },
   "builders": [{
@@ -24,9 +24,15 @@
       "mkdir /home/chef/.chef",
       "git clone https://github.com/chef-training/chef-generator.git /home/chef/.chef/generator",
       "echo 'chefdk.generator_cookbook = \"/home/chef/.chef/generator\"' > /home/chef/.chef/config.rb",
-      "git clone -b extending-cookbooks https://github.com/chef-training/chef-intermediate-repo.git /home/chef/day2-repo",
       "/usr/bin/chef gem install kitchen-docker"
 
     ]
+  },
+  {
+    "type": "chef-solo",
+    "install_command": "curl -L https://www.chef.io/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s",
+    "cookbook_paths": ["cookbooks"],
+    "run_list": ["workstations::foundations"]
+
   }]
 }
