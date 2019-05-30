@@ -45,8 +45,8 @@ Chef-Intermediate:
   - packer_script
     'intermediate-centos-7.4.json'
   - ami_name
-    Intermediate Training - CentOS 7.4 - 0.0.14
+    Intermediate Training - CentOS 7.4 - 0.0.15
   - ami_id
-    ami-0f1c8f97fe6a372eb
+    ami-0e14c8b1d4e78124a
   - instance
     t1.micro

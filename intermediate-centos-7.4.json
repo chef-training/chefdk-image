@@ -1,6 +1,6 @@
 {
   "variables": {
-    "name": "Intermediate Training - CentOS 7.4 - 0.0.14",
+    "name": "Intermediate Training - CentOS 7.4 - 0.0.15",
     "workstation_version": "0.2.43"
   },
   "builders": [{
