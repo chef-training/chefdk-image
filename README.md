@@ -42,7 +42,8 @@ Windows:
 $env:TRAINING_AWS_KEYPAIR=/Users/franklinwebber/.ssh/training-ec2-keypair.pem
 ```
 
-\4. Install [Packer](https://www.packer.io/downloads.html). At least 0.8.1.
+\4. Install [Packer](https://www.packer.io/downloads.html). At least 1.4.2.
+Older versions will not be able to accept Chef License.
 
 ## Creating AMI
 

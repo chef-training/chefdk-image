@@ -32,9 +32,9 @@ Chef-Foundations_AMI_2:
   - packer_script
     foundations-centos-7.4.json
   - ami_name
-    Foundations Training - CentOS 7.4 - 0.0.2
+    Foundations Training - CentOS 7.4 - 1.00
   - ami_id
-    ami-00d3e13fa42a594fa
+    ami-047f1a4ac2cd342e1
   # - ami_name
   #   Essentials - CentOS 6.7 - 7.0.0
   # - ami_id

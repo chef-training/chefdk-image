@@ -1,7 +1,7 @@
 {
   "variables": {
-    "name": "Foundations Training - CentOS 7.4 - 0.0.2",
-    "workstation_version": "0.2.43"
+    "name": "Foundations Training - CentOS 7.4 - 1.0.0",
+    "workstation_version": "0.5.1"
   },
   "builders": [{
     "ssh_username": "chef",
@@ -24,6 +24,7 @@
       "mkdir /home/chef/.chef",
       "git clone https://github.com/chef-training/chef-generator.git /home/chef/.chef/generator",
       "echo 'chefdk.generator_cookbook = \"/home/chef/.chef/generator\"' > /home/chef/.chef/config.rb",
+      "/usr/bin/chef env --chef-license accept",
       "/usr/bin/chef gem install kitchen-docker"
 
     ]
@@ -32,7 +33,7 @@
     "type": "chef-solo",
     "install_command": "curl -L https://www.chef.io/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s",
     "cookbook_paths": ["cookbooks"],
-    "run_list": ["workstations::foundations"]
-
+    "run_list": ["workstations::foundations"],
+    "chef_license": "accept"
   }]
 }
